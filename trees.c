@@ -1,24 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// factory method: different types of trees with different root nodes need to be created
-//typedef struct TreeFactory {
-//	// function pointer with a return type of Node* with params: int value
-//	Node* (*createRootNode)(int value); 
-//} TreeFactory;
-
-// Example on how to use this typedef
-// = { createSimpleRootNode }: This is the initializer list, and it's used to initialize the members of the TreeFactory structure.
-//TreeFactory simpleTreeFactory = { createSimpleRootNode };
-//Node* root = simpleTreeFactory.createRootNode(10);
-
 typedef struct Node {
 	int value;
 	struct Node* left;
 	struct Node* right;
 } Node;
 
-Node* createSimpleRootNode(int value){
+Node* createNode(int value){
 	Node* rootNode = (Node*)malloc(sizeof(Node)); // type cast pointer return by malloc (void*) to Node*
 	rootNode->value = value;
 	rootNode->left = NULL;
@@ -29,7 +18,7 @@ Node* createSimpleRootNode(int value){
 
 Node* addNode(Node* curr,  int value){
 	if(curr == NULL){
-		curr = createSimpleRootNode(value);
+		curr = createNode(value);
 	} else if(value < curr->value) {
 		curr->left = addNode(curr->left, value);
 	} else if(value > curr->value) {
@@ -37,18 +26,6 @@ Node* addNode(Node* curr,  int value){
 	}	
 
 	return curr;
-}
-
-void demolish(Node* curr){
-	if(curr == NULL) {
-		return;
-	}
-
-	demolish(curr->left);
-	demolish(curr->right);
-	// post-order traversal
-	printf("post-order traversal: %d\n", curr->value);
-	free(curr);
 }
 
 void printTree(Node* curr){
@@ -62,6 +39,17 @@ void printTree(Node* curr){
 	printTree(curr->right);
 }
 
+void demolish(Node* curr){
+	if(curr == NULL) {
+		return;
+	}
+
+	demolish(curr->left);
+	demolish(curr->right);
+	// post-order traversal
+	printf("post-order traversal: %d\n", curr->value);
+	free(curr);
+}
 
 int main(void){
 	Node *root = NULL;
