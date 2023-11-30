@@ -1,5 +1,34 @@
-# Practice and deepen tree knowlege while learning C
+# Practice tree knowlege while learning C
 
+## Review pointers and refs
+
+- Every time we define a variable, the compiler finds an unused address in memory and reserves one or more bytes there to store it. Important: the address of a variable is defined to be the lowest address in memory where the variable is stored.
+
+```c
+int age = 41
+
+cout << "age's address: " << &age; // print the address of age
+```
+
+- A pointer variable is a special kind of variable that holds another variable's address instead of a regular value.
+
+```c
+int age = 42;
+int *p; // variable p is a pointer to an int variable
+p = &age; // p points to the address of age
+```
+
+- Can use your pointer and the star operator to read/write to the other variables.
+
+```c
+int age = 42;
+int *p;
+p = &age;
+
+cout << "age's value: " << *p; // get the address stored in p, go to that memory address, and give me the value stored there
+
+*p = 5; // get the adress value stored in the p variable, go to that memory address, and store a value of 5 there
+```
 ## Tree
 
 - A Tree is a special linked list-based data structure.
@@ -36,4 +65,3 @@
 - Traverse the binary search tree.
 - Free the memory used by the binary search tree.
 
-# TODO: Review pointers and refs
