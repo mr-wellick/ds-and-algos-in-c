@@ -17,7 +17,7 @@ Node* createNode(int value){
 	return rootNode;
 }
 
-void insert(Node* curr,  int value){
+void insert(Node *curr,  int value){
 	// if tree is empty, create root node, done.
 	if(curr == NULL){
 		curr = createNode(value);
@@ -105,7 +105,7 @@ void demolish(Node* curr){
 
 int main(void){
 	// create BST and add values
-	Node *root = NULL;
+	Node *root = createNode(10);
 	//        10
 	//      /    \
 	//     5      15
@@ -113,19 +113,18 @@ int main(void){
 	//  -5  N    N   N
 	//  /\
 	// N N
-	insert(root, 10);
-	//insert(root, 5);
-	//insert(root, 5);
-	//insert(root, 15);
-	//insert(root, -5);
+	insert(root, 5);
+	insert(root, 5);
+	insert(root, 15);
+	insert(root, -5);
 
 	// find a value
-	//int needle = -5;
-	//printf("\n");
-	//printf("Was %d found?\n", needle);
-	//printf("True: 1 or False: 0\n");
-	//printf("Result: %d\n", find(root, needle));
-	//printf("\n");
+	int needle = -5;
+	printf("\n");
+	printf("Was %d found?\n", needle);
+	printf("True: 1 or False: 0\n");
+	printf("Result: %d\n", find(root, needle));
+	printf("\n");
 
 	// perform operations before freeing up the tree lol
 	printTree(root);
