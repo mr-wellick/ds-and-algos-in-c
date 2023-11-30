@@ -31,7 +31,7 @@ Node* insert(Node* curr,  int value){
 
 /* Big Oh of BST Search
  *
- * - In the average BST with N value, how many steps are required to find our value? ==> Log2(N) steps.
+ * - In the average BST with N values, how many steps are required to find our value? ==> Log2(N) steps.
  * - In the worst case BST with N values, how many steps are required to find our value? ==> N steps.
  *
  * */
@@ -42,7 +42,7 @@ bool find(Node* curr, int value){
 		return true;
 	} else if(value < curr->value){
 		return find(curr->left, value);
-	}else {
+	} else {
 		return find(curr->right, value);
 	}
 }
@@ -83,11 +83,13 @@ void demolish(Node* curr){
 int main(void){
 	// create BST and add values
 	Node *root = NULL;
-	//       10
-	//     /    \
-	//    5      15
-	//   / \     / \
-	//  N  N    N   N
+	//        10
+	//      /    \
+	//     5      15
+	//    / \     / \
+	//  -5  N    N   N
+	//  /\
+	// N N
 	root = insert(root, 10);
 	root = insert(root, 5);
 	root = insert(root, 15);
