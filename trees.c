@@ -17,16 +17,39 @@ Node* createNode(int value){
 	return rootNode;
 }
 
-Node* insert(Node* curr,  int value){
+void insert(Node* curr,  int value){
+	// if tree is empty, create root node, done.
 	if(curr == NULL){
 		curr = createNode(value);
-	} else if(value < curr->value) {
-		curr->left = insert(curr->left, value);
-	} else if(value > curr->value) {
-		curr->right = insert(curr->right, value);
-	}	
+		return;
+	}
 
-	return curr;
+	for(;;){
+		// if value exists, we're done.
+		if(value == curr->value){
+			return;
+		}
+		
+		// go left
+		if(value < curr->value){
+			if(curr->left != NULL){
+				curr = curr->left;
+			} else { // create node and insert into tree
+				curr->left = createNode(value);
+				return;
+			}
+		// go right
+		} else if(value > curr->value){
+			if(curr->right != NULL){
+				curr = curr->right;
+			}
+			else { // create node and insert into tree
+				curr->right = createNode(value);
+				return;
+			}
+		}
+
+	}
 }
 
 /* Big Oh of BST Search
@@ -90,18 +113,19 @@ int main(void){
 	//  -5  N    N   N
 	//  /\
 	// N N
-	root = insert(root, 10);
-	root = insert(root, 5);
-	root = insert(root, 15);
-	root = insert(root, -5);
+	insert(root, 10);
+	//insert(root, 5);
+	//insert(root, 5);
+	//insert(root, 15);
+	//insert(root, -5);
 
 	// find a value
-	int needle = -5;
-	printf("\n");
-	printf("Was %d found?\n", needle);
-	printf("True: 1 or False: 0\n");
-	printf("Result: %d\n", find(root, needle));
-	printf("\n");
+	//int needle = -5;
+	//printf("\n");
+	//printf("Was %d found?\n", needle);
+	//printf("True: 1 or False: 0\n");
+	//printf("Result: %d\n", find(root, needle));
+	//printf("\n");
 
 	// perform operations before freeing up the tree lol
 	printTree(root);

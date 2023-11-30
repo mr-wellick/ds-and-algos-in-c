@@ -35,3 +35,5 @@
 - Find the number of nodes and leaves in the binary search tree.
 - Traverse the binary search tree.
 - Free the memory used by the binary search tree.
+
+# TODO: Review pointers and refs
