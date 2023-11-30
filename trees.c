@@ -29,6 +29,12 @@ Node* insert(Node* curr,  int value){
 	return curr;
 }
 
+/* Big Oh of BST Search
+ *
+ * - In the average BST with N value, how many steps are required to find our value? ==> Log2(N) steps.
+ * - In the worst case BST with N values, how many steps are required to find our value? ==> N steps.
+ *
+ * */
 bool find(Node* curr, int value){
 	if(curr == NULL){
 		return false;
@@ -41,6 +47,11 @@ bool find(Node* curr, int value){
 	}
 }
 
+/* Big Oh of printing BST
+ *
+ * - Since we need to visit each node, it's N steps.
+ *
+ * */
 void printTree(Node* curr){
 	if(curr == NULL){
 		return;
@@ -52,6 +63,11 @@ void printTree(Node* curr){
 	printTree(curr->right);
 }
 
+/* Big Oh of freeing BST
+ *
+ * - Since we need to visit each node, it's N steps.
+ *
+ * */
 void demolish(Node* curr){
 	if(curr == NULL) {
 		return;
