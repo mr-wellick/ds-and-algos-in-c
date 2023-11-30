@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 
 typedef struct Node {
@@ -28,6 +29,18 @@ Node* insert(Node* curr,  int value){
 	return curr;
 }
 
+bool find(Node* curr, int value){
+	if(curr == NULL){
+		return false;
+	} else if(value == curr->value){
+		return true;
+	} else if(value < curr->value){
+		return find(curr->left, value);
+	}else {
+		return find(curr->right, value);
+	}
+}
+
 void printTree(Node* curr){
 	if(curr == NULL){
 		return;
@@ -52,6 +65,7 @@ void demolish(Node* curr){
 }
 
 int main(void){
+	// create BST and add values
 	Node *root = NULL;
 	//       10
 	//     /    \
@@ -61,10 +75,21 @@ int main(void){
 	root = insert(root, 10);
 	root = insert(root, 5);
 	root = insert(root, 15);
+	root = insert(root, -5);
 
+	// find a value
+	int needle = -5;
+	printf("\n");
+	printf("Was %d found?\n", needle);
+	printf("True: 1 or False: 0\n");
+	printf("Result: %d\n", find(root, needle));
+	printf("\n");
+
+	// perform operations before freeing up the tree lol
 	printTree(root);
 	printf("\n");
 	demolish(root);
+	printf("\n");
 
 	return 0;
 }
