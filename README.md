@@ -29,6 +29,31 @@ cout << "age's value: " << *p; // get the address stored in p, go to that memory
 
 *p = 5; // get the adress value stored in the p variable, go to that memory address, and store a value of 5 there
 ```
+
+- Pointers vs References: When you pass a variable by reference to a function, what really happens? In fact, a reference is just a simpler notation for passing by a pointer!
+
+```c
+void set(int &val){ // val is a reference
+    val = 5;
+}
+
+int main(){
+    int x = 1;
+    // looks like we're just passing the value of x to set(), but since set() accepts a reference, we are passing the address of variable x to set().
+    set(x);
+    cout << x;
+}
+```
+
+- Common pitfalls.
+
+```c
+// did not initialize the pointer variable. we don't know where p points to. it points to some random spot in memory.
+// must always set the value of a pointer variable before using the *operator on it!
+int *p; 
+*p = 1234;
+```
+
 ## Tree
 
 - A Tree is a special linked list-based data structure.
