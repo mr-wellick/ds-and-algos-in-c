@@ -16,13 +16,13 @@ Node* createNode(int value){
 	return rootNode;
 }
 
-Node* addNode(Node* curr,  int value){
+Node* insert(Node* curr,  int value){
 	if(curr == NULL){
 		curr = createNode(value);
 	} else if(value < curr->value) {
-		curr->left = addNode(curr->left, value);
+		curr->left = insert(curr->left, value);
 	} else if(value > curr->value) {
-		curr->right = addNode(curr->right, value);
+		curr->right = insert(curr->right, value);
 	}	
 
 	return curr;
@@ -58,9 +58,9 @@ int main(void){
 	//    5      15
 	//   / \     / \
 	//  N  N    N   N
-	root = addNode(root, 10);
-	root = addNode(root, 5);
-	root = addNode(root, 15);
+	root = insert(root, 10);
+	root = insert(root, 5);
+	root = insert(root, 15);
 
 	printTree(root);
 	printf("\n");
