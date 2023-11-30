@@ -107,13 +107,13 @@ void demolish(Node *curr) {
 int main(void) {
   // create BST and add values
   Node *root = createNode(10);
-  //        10
-  //      /    \
-  //     5      15
-  //    / \     / \
-  //  -5  N    N   N
-  //  /\
-  // N N
+  /*      10
+        /    \
+       5      15
+      / \     / \
+    -5  N    N   N
+    /\
+   N N                */
   insert(root, 5);
   insert(root, 5);
   insert(root, 15);
