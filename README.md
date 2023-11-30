@@ -1,6 +1,10 @@
 # Practice tree knowlege while learning C
 
-## Review pointers and refs
+## Review pointers and refs (in C++)
+
+- IMPORTANT: C and C++ are two different languages according to Bjarne Stroustrup, creator of C++. However, the fundamentals of pointers carry over to C. To learn C, I am referencing: C Programming a Modern Approach.
+
+- The reason for reviewing pointers in C++ is because the university course I took taught us CS fundamentals using C++. After this quick review, the tree data structures will be implemented using C.
 
 - Every time we define a variable, the compiler finds an unused address in memory and reserves one or more bytes there to store it. Important: the address of a variable is defined to be the lowest address in memory where the variable is stored.
 
