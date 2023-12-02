@@ -1,6 +1,7 @@
 #include <stdbool.h>
-#include <stdio.h>
+#include "trees.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct Node {
   int value;
@@ -51,14 +52,6 @@ void insert(Node *curr, int value) {
   }
 }
 
-/* Big Oh of BST Search
- *
- * - In the average BST with N values, how many steps are required to find our
- * value? ==> Log2(N) steps.
- * - In the worst case BST with N values, how many steps are required to find
- * our value? ==> N steps.
- *
- * */
 bool find(Node *curr, int value) {
   if (curr == NULL) {
     return false;
@@ -71,11 +64,6 @@ bool find(Node *curr, int value) {
   }
 }
 
-/* Big Oh of printing BST
- *
- * - Since we need to visit each node, it's N steps.
- *
- * */
 void printTree(Node *curr) {
   if (curr == NULL) {
     return;
@@ -87,11 +75,6 @@ void printTree(Node *curr) {
   printTree(curr->right);
 }
 
-/* Big Oh of freeing BST
- *
- * - Since we need to visit each node, it's N steps.
- *
- * */
 void demolish(Node *curr) {
   if (curr == NULL) {
     return;
@@ -104,34 +87,34 @@ void demolish(Node *curr) {
   free(curr);
 }
 
-int main(void) {
-  // create BST and add values
-  Node *root = createNode(10);
-  /*      10
-        /    \
-       5      15
-      / \     / \
-    -5  N    N   N
-    /\
-   N N                */
-  insert(root, 5);
-  insert(root, 5);
-  insert(root, 15);
-  insert(root, -5);
-
-  // find a value
-  int needle = -5;
-  printf("\n");
-  printf("Was %d found?\n", needle);
-  printf("True: 1 or False: 0\n");
-  printf("Result: %d\n", find(root, needle));
-  printf("\n");
-
-  // perform operations before freeing up the tree lol
-  printTree(root);
-  printf("\n");
-  demolish(root);
-  printf("\n");
-
-  return 0;
-}
+//int main(void) {
+//  // create BST and add values
+//  Node *root = createNode(10);
+//  /*      10
+//        /    \
+//       5      15
+//      / \     / \
+//    -5  N    N   N
+//    /\
+//   N N                */
+//  insert(root, 5);
+//  insert(root, 5);
+//  insert(root, 15);
+//  insert(root, -5);
+//
+//  // find a value
+//  int needle = -5;
+//  printf("\n");
+//  printf("Was %d found?\n", needle);
+//  printf("True: 1 or False: 0\n");
+//  printf("Result: %d\n", find(root, needle));
+//  printf("\n");
+//
+//  // perform operations before freeing up the tree lol
+//  printTree(root);
+//  printf("\n");
+//  demolish(root);
+//  printf("\n");
+//
+//  return 0;
+//}
