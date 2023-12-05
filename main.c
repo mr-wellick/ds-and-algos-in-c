@@ -34,6 +34,9 @@ int main(void) {
   printf("The max value is: %d\n", max(root));
   printf("\n");
 
+  // delete node
+  erase(root, 15);
+
   // perform operations before freeing up the tree lol
   demolish(root);
   printf("\n");

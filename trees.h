@@ -15,6 +15,13 @@ Node *createNode(int value);
  * */
 void insert(Node *curr, int value);
 
+/* Big Oh of BST Deletion
+ *
+ * - Not so simple
+ *
+ * */
+void erase(Node *curr, int value);
+
 /* Big Oh of BST Search
  *
  * - In the average BST with N values, how many steps are required to find our
