@@ -69,10 +69,14 @@ void erase(Node *curr, int value) {
        *        - Set the root pointer to NULL
        *        - Then delete the target (curr) node
        */
-      if (!curr->left && !curr->right) {
+      if (!parent) {
+        free(curr);
+        curr = NULL;
+        return;
+      } else {
         if (parent->right == curr) {
           parent->right = NULL;
-        } else {
+        } else if(parent->left == curr){
           parent->left = NULL;
         }
 	free(curr);

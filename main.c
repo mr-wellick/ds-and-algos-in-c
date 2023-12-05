@@ -41,5 +41,13 @@ int main(void) {
   demolish(root);
   printf("\n");
 
+  // create new tree
+  Node *rootTwo = createNode(10);
+  printTree(root);
+  printf("\n");
+  erase(rootTwo, 10);
+
+  demolish(rootTwo);
+
   return 0;
 }
