@@ -24,9 +24,17 @@ int main(void) {
   printf("Result: %d\n", find(root, needle));
   printf("\n");
 
-  // perform operations before freeing up the tree lol
+
   printTree(root);
   printf("\n");
+
+  // find min in tree (-5)
+  printf("The min value is: %d\n", min(root));
+  // find max in tree (15)
+  printf("The max value is: %d\n", max(root));
+  printf("\n");
+
+  // perform operations before freeing up the tree lol
   demolish(root);
   printf("\n");
 

@@ -1,6 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "trees.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct Node {
   int value;
@@ -63,6 +63,30 @@ bool find(Node *curr, int value) {
   }
 }
 
+int min(Node *curr) {
+  if (curr == NULL) {
+    return -1;
+  }
+
+  if (curr->left == NULL) {
+    return curr->value;
+  }
+
+  return min(curr->left);
+}
+
+int max(Node *curr) {
+  if (curr == NULL) {
+    return -1;
+  }
+
+  if (curr->right== NULL) {
+    return curr->value;
+  }
+
+  return max(curr->right);
+}
+
 void printTree(Node *curr) {
   if (curr == NULL) {
     return;
@@ -85,4 +109,3 @@ void demolish(Node *curr) {
   printf("post-order traversal: %d\n", curr->value);
   free(curr);
 }
-

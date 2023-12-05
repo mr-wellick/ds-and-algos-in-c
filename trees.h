@@ -39,4 +39,20 @@ void printTree(Node *curr);
  * */
 void demolish(Node *curr);
 
+/* Big Oh of Finding the min value.
+ *
+ * - The min value is located to the left-most node.
+ * - This depends on whether the tree is balanced or not.
+ *
+ * */
+int min(Node *curr);
+
+/* Big Oh of finding the max value.
+ *
+ * - The max value is located to the right-most node.
+ * - This depends on whether the tree is balanced or not.
+ *
+ * */
+int max(Node *curr);
+
 #endif
