@@ -45,9 +45,15 @@ int main(void) {
   Node *rootTwo = createNode(10);
   printTree(root);
   printf("\n");
+
+  // print out ref
+  if(rootTwo == NULL) {
+    printf("root two is NULL \n");
+  }
+
   erase(rootTwo, 10);
 
-  demolish(rootTwo);
+  //demolish(rootTwo);
 
   return 0;
 }

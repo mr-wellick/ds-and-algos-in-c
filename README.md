@@ -1,61 +1,99 @@
 # Practice tree knowlege while learning C
 
-## Review pointers and refs (in C++)
+## Pointer Basics
 
-- IMPORTANT: C and C++ are two different languages according to Bjarne Stroustrup, creator of C++. However, the fundamentals of pointers carry over to C. To learn C, I am referencing: C Programming a Modern Approach.
+- Main memory is divided into bytes each capable of storing eight bits of information:
 
-- The reason for reviewing pointers in C++ is because the university course I took taught us CS fundamentals using C++. After this quick review, the tree data structures will be implemented using C.
+```
+0 | 0 | 0 | 0 | 0 | 0 | 0 | 0
+```
+- Each byte has a unique address to distinguish it from the other bytes in memory.
 
-- Every time we define a variable, the compiler finds an unused address in memory and reserves one or more bytes there to store it. Important: the address of a variable is defined to be the lowest address in memory where the variable is stored.
+- A pointer is an address. A pointer variable is a variable that can store an address (p points to i).
 
-```c
-int age = 41
-
-cout << "age's address: " << &age; // print the address of age
+```
+        ____
+p ---> | _ | i
 ```
 
-- A pointer variable is a special kind of variable that holds another variable's address instead of a regular value.
+## Declaring Pointer Variables
+
+- This declaration states that p is a pointer variable capable of pointing to "objects" (need to read more on this) of type int.
 
 ```c
-int age = 42;
-int *p; // variable p is a pointer to an int variable
-p = &age; // p points to the address of age
+int *p
 ```
 
-- Can use your pointer and the star operator to read/write to the other variables.
+- To find the address of a variable, we use & (address) operator. 
 
 ```c
-int age = 42;
+int x = 5;
+&x; // address of x
+```
+
+- To gain access to the object that a pointer points to, we use the * (indirection) operator.
+
+```c
 int *p;
-p = &age;
-
-cout << "age's value: " << *p; // get the address stored in p, go to that memory address, and give me the value stored there
-
-*p = 5; // get the adress value stored in the p variable, go to that memory address, and store a value of 5 there
+*p; // *p represents the object to which p currently points
 ```
 
-- Pointers vs References: When you pass a variable by reference to a function, what really happens? In fact, a reference is just a simpler notation for passing by a pointer!
+- It's crucial to initialize pointer variables before we use them.
 
 ```c
-void set(int &val){ // val is a reference
-    val = 5;
-}
+// points nowhere in particular
+int *p;
 
-int main(){
-    int x = 1;
-    // looks like we're just passing the value of x to set(), but since set() accepts a reference, we are passing the address of variable x to set().
-    set(x);
-    cout << x;
-}
+
+// use the address of another variable to initialize q
+int x = 5;
+int *q; 
+q = &x;
 ```
 
-- Common pitfalls.
+## Indirection Operator
+
+- Once a variable points to an object, we can use the * (indirection) operator to access what's stored in the object.
 
 ```c
-// did not initialize the pointer variable. we don't know where p points to. it points to some random spot in memory.
-// must always set the value of a pointer variable before using the *operator on it!
-int *p; 
-*p = 1234;
+int x = 5;
+int *p = &x;
+
+printf("%d\n", *p); // print what's stored in the object (can think of * as the inverse of &)
+```
+
+- As long as p points to x, p is an alias for x. Not only does *p have the same value as x, but changing the value of *p also changes the value of x.
+
+- Note, never apply the indirection operator to an uninitialized pointer variable. This causes undefined behavior
+
+## Pointer Assignment
+
+```c
+int i, j, *p, *q;
+
+i = 6;
+
+p = &i; // take address of i and assign it to p
+q = p; // take address stored in p and assign it to q
+
+q = &j // override address stored in q with the address of j
+
+// note: be careful with the following
+q = p; // pointer assignment
+*q = *p; // copies the value that p points to into the object that q points to
+```
+
+## Pointers as Arguments
+
+- A variable supplied as an argument in a function call is protected against change, because C passes arguments by value.
+
+```c
+void decompose(double x, long *int_part, double *frac_part) {
+    *int_part = (long)x;
+    *fract_part = x - *int_part;
+}
+
+void decompose(3.14159, &i, &d);
 ```
 
 ## Tree

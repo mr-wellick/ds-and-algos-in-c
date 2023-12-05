@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Node {
+struct Node {
   int value;
   struct Node *left;
   struct Node *right;
-} Node;
+};
 
 Node *createNode(int value) {
   Node *rootNode = (Node *)malloc(
@@ -70,6 +70,7 @@ void erase(Node *curr, int value) {
        *        - Then delete the target (curr) node
        */
       if (!parent) {
+      // BUG: Issue with pointer. Review how pointers/refs are passed to functions and diagram this code out to understand what's really happening
         free(curr);
         curr = NULL;
         return;
