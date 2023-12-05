@@ -1,6 +1,8 @@
 #ifndef TREE_H
 #define TREE_H
 
+#include <stdbool.h>
+
 typedef struct Node Node;
 
 Node *createNode(int value);
