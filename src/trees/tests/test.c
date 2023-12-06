@@ -1,5 +1,5 @@
-#include "src/unity.h"
-#include "trees.h" // Include the source file you want to test
+#include "../../../unity/unity.h"
+#include "../trees.h" // Include the source file you want to test
 
 void setUp(void) {
     // Optional: Any setup code that needs to run before each test
