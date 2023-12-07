@@ -64,7 +64,7 @@ printf("%d\n", *p); // print what's stored in the object (can think of * as the 
 
 - As long as p points to x, p is an alias for x. Not only does *p have the same value as x, but changing the value of *p also changes the value of x.
 
-- Note, never apply the indirection operator to an uninitialized pointer variable. This causes undefined behavior
+- Note, never apply the indirection operator to an uninitialized pointer variable. This causes undefined behavior.
 
 ## Pointer Assignment
 
@@ -72,20 +72,25 @@ printf("%d\n", *p); // print what's stored in the object (can think of * as the 
 int i, j, *p, *q;
 
 i = 6;
+j = 7;
 
-p = &i; // take address of i and assign it to p
-q = p; // take address stored in p and assign it to q
+p = &i; // take address of i and assign it to p (p points to i)
+q = p; // take address stored in p and assign it to q (q points to i)
 
-q = &j // override address stored in q with the address of j
+q = &j // override address stored in q with the address of j (q points to j)
 
 // note: be careful with the following
-q = p; // pointer assignment
-*q = *p; // copies the value that p points to into the object that q points to
+q = p; // pointer assignment (q points to i once more)
+q = &j // take the address of j and assign it to q (q points to j, again)
+
+*q = *p; // copies the value that p points to into the object that q points to (the value of both i and j is now 6)
 ```
 
 ## Pointers as Arguments
 
 - A variable supplied as an argument in a function call is protected against change, because C passes arguments by value.
+
+- We can use pointers as arguments to circumvent this:
 
 ```c
 void decompose(double x, long *int_part, double *frac_part) {
@@ -96,6 +101,7 @@ void decompose(double x, long *int_part, double *frac_part) {
 int i = 5;
 int d = 5;
 
+// pass the address of i and d
 void decompose(3.14159, &i, &d);
 ```
 
