@@ -169,4 +169,5 @@ void demolish(Node *curr) {
   // post-order traversal
   printf("post-order traversal: %d\n", curr->value);
   free(curr);
+  curr = NULL;
 }

@@ -1,21 +1,29 @@
 #include "../../../unity/unity.h"
-#include "../trees.h" // Include the source file you want to test
+#include "../trees.h"
+#include <stdlib.h>
 
-void setUp(void) {
-    // Optional: Any setup code that needs to run before each test
-}
+// Optional: Any setup code that needs to run before each test
+void setUp(void) {}
 
-void tearDown(void) {
-    // Optional: Any teardown code that needs to run after each test
-}
+// Optional: Any teardown code that needs to run after each test
+void tearDown(void) {}
 
 void test_create_node(void) {
-  Node *root = createNode(5);
-  TEST_ASSERT_EQUAL_INT(5, root->value);
-  demolish(root);
-}
+  Node *root = (Node*)malloc(sizeof(Node));
+  root->value = 5;
+  root->left = NULL;
+  root->right = NULL;
 
-// You can add more test cases as needed
+  TEST_ASSERT_EQUAL_INT(5, root->value);
+  TEST_ASSERT_NULL(root->left);
+  TEST_ASSERT_NULL(root->right);
+
+  demolish(root);
+  printf("test %d\n", root->value);
+  printf("test %p\n", root->left);
+  printf("test %p\n", root->right);
+  TEST_ASSERT_NULL(root);
+}
 
 int main(void) {
   UNITY_BEGIN();

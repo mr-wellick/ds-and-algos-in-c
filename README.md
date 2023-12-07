@@ -116,3 +116,33 @@ int *f(void) {
     return &i;
 }
 ```
+
+## Dynamic Storage Allocation
+
+- To allocate storage dynamically, we'll need to call one of the tree memory allocation functions declared in <stdlib.h>:
+
+```c
+#include <stdlib.h>
+
+malloc() // allocates a block of memory but does not initialize it
+calloc() // allocates a block of memory and clears it
+realloc() // resizes a previously allocated block of memory
+```
+
+- Malloc is the most used. When we call a memory allocation function to request a block of memory. The function has no idea what type of data we're planning to store in the block, so it can't return a pointer to an ordinary type. Instead, the function returns a value of type void* (a generic pointer, just a memory address).
+
+## Null Pointers
+
+- When a memory allocation function is called, there is always the possibility that it won't be able to locate a block of memory large enough to satisfy the request. If that occurs, the function will return a NULL pointer.
+
+- A NULL pointer is a pointer to nothing, a special value that can be distinguished from all valid pointers.
+
+- The null pointer is represented by a macro named NULL, so we can test malloc's return value:
+
+```c
+// some previously and properly declared variable p
+p = malloc(10000)
+if (p == NULL) {
+    // allocation failed, take proper action
+}
+```
