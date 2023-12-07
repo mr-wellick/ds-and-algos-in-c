@@ -9,23 +9,22 @@ typedef struct Node {
   struct Node *right;
 } Node;
 
-
-Node *createNode(int value);
+//Node *createNode(int value);
 
 /* Big Oh of BST Insertion
  *
- * - It's Log2(N) because first we have to use a binary search to find where to insert our node.
- *   Recall, binary search is Log2(N).
+ * - It's Log2(N) because first we have to use a binary search to find where to
+ * insert our node. Recall, binary search is Log2(N).
  *
  * */
-//void insert(Node *curr, int value);
+// void insert(Node *curr, int value);
 
 /* Big Oh of BST Deletion
  *
  * - Not so simple
  *
  * */
-//void erase(Node *curr, int value);
+// void erase(Node *curr, int value);
 
 /* Big Oh of BST Search
  *
@@ -35,14 +34,14 @@ Node *createNode(int value);
  *   our value? ==> N steps.
  *
  * */
-//bool find(Node *curr, int value);
+// bool find(Node *curr, int value);
 
 /* Big Oh of printing BST
  *
  * - Since we need to visit each node, it's N steps.
  *
  * */
-//void printTree(Node *curr);
+// void printTree(Node *curr);
 
 /* Big Oh of freeing BST
  *
@@ -57,7 +56,7 @@ void demolish(Node *curr);
  * - This depends on whether the tree is balanced or not.
  *
  * */
-//int min(Node *curr);
+// int min(Node *curr);
 
 /* Big Oh of finding the max value.
  *
@@ -65,6 +64,6 @@ void demolish(Node *curr);
  * - This depends on whether the tree is balanced or not.
  *
  * */
-//int max(Node *curr);
+// int max(Node *curr);
 
 #endif

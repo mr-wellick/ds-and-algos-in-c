@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node *createNode(int value) {
-  Node *rootNode = (Node *)malloc(
-      sizeof(Node)); // type cast pointer return by malloc (void*) to Node*
-  rootNode->value = value;
-  rootNode->left = NULL;
-  rootNode->right = NULL;
-
-  return rootNode;
-}
+//Node *createNode(int value) {
+//  Node *rootNode = (Node *)malloc(
+//      sizeof(Node)); // type cast pointer return by malloc (void*) to Node*
+//  rootNode->value = value;
+//  rootNode->left = NULL;
+//  rootNode->right = NULL;
+//
+//  return rootNode;
+//}
 
 //void insert(Node *curr, int value) {
 //  // if tree is empty, create root node, done.

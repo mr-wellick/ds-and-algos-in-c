@@ -93,8 +93,24 @@ void decompose(double x, long *int_part, double *frac_part) {
     *fract_part = x - *int_part;
 }
 
+int i = 5;
+int d = 5;
+
 void decompose(3.14159, &i, &d);
 ```
+
+## Pointers as return types
+
+- Never return a pointer to an automatic local variable:
+
+```c
+int *f(void) {
+    int i;
+    // i does not exist once f returns, so the pointer to it will be invalid!
+    return &i;
+}
+```
+
 
 ## Tree
 
