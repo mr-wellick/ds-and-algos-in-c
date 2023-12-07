@@ -1,96 +1,148 @@
-# Practice tree knowlege while learning C
+# Practice Data Structures & Algorithms while learning C
 
-## Review pointers and refs (in C++)
+## Pointer Basics
 
-- IMPORTANT: C and C++ are two different languages according to Bjarne Stroustrup, creator of C++. However, the fundamentals of pointers carry over to C. To learn C, I am referencing: C Programming a Modern Approach.
+- Main memory is divided into bytes each capable of storing eight bits of information:
 
-- The reason for reviewing pointers in C++ is because the university course I took taught us CS fundamentals using C++. After this quick review, the tree data structures will be implemented using C.
+```
+0 | 0 | 0 | 0 | 0 | 0 | 0 | 0
+```
+- Each byte has a unique address to distinguish it from the other bytes in memory.
 
-- Every time we define a variable, the compiler finds an unused address in memory and reserves one or more bytes there to store it. Important: the address of a variable is defined to be the lowest address in memory where the variable is stored.
+- A pointer is an address. A pointer variable is a variable that can store an address (p points to i).
 
-```c
-int age = 41
-
-cout << "age's address: " << &age; // print the address of age
+```
+        ____
+p ---> | _ | i
 ```
 
-- A pointer variable is a special kind of variable that holds another variable's address instead of a regular value.
+## Declaring Pointer Variables
+
+- This declaration states that p is a pointer variable capable of pointing to "objects" (need to read more on this) of type int.
 
 ```c
-int age = 42;
-int *p; // variable p is a pointer to an int variable
-p = &age; // p points to the address of age
+int *p
 ```
 
-- Can use your pointer and the star operator to read/write to the other variables.
+- To find the address of a variable, we use & (address) operator. 
 
 ```c
-int age = 42;
+int x = 5;
+&x; // address of x
+```
+
+- To gain access to the object that a pointer points to, we use the * (indirection) operator.
+
+```c
 int *p;
-p = &age;
-
-cout << "age's value: " << *p; // get the address stored in p, go to that memory address, and give me the value stored there
-
-*p = 5; // get the adress value stored in the p variable, go to that memory address, and store a value of 5 there
+*p; // *p represents the object to which p currently points
 ```
 
-- Pointers vs References: When you pass a variable by reference to a function, what really happens? In fact, a reference is just a simpler notation for passing by a pointer!
+- It's crucial to initialize pointer variables before we use them.
 
 ```c
-void set(int &val){ // val is a reference
-    val = 5;
-}
+// points nowhere in particular
+int *p;
 
-int main(){
-    int x = 1;
-    // looks like we're just passing the value of x to set(), but since set() accepts a reference, we are passing the address of variable x to set().
-    set(x);
-    cout << x;
-}
+
+// use the address of another variable to initialize q
+int x = 5;
+int *q; 
+q = &x;
 ```
 
-- Common pitfalls.
+## Indirection Operator
+
+- Once a variable points to an object, we can use the * (indirection) operator to access what's stored in the object.
 
 ```c
-// did not initialize the pointer variable. we don't know where p points to. it points to some random spot in memory.
-// must always set the value of a pointer variable before using the *operator on it!
-int *p; 
-*p = 1234;
+int x = 5;
+int *p = &x;
+
+printf("%d\n", *p); // print what's stored in the object (can think of * as the inverse of &)
 ```
 
-## Tree
+- As long as p points to x, p is an alias for x. Not only does *p have the same value as x, but changing the value of *p also changes the value of x.
 
-- A Tree is a special linked list-based data structure.
-- Common use cases: 
-    - Organize hierarchical data.
-    - Make information easily searchable.
-    - Simplify evaluation of math expressions.
-    - To make decisions (decision tree).
+- Note, never apply the indirection operator to an uninitialized pointer variable. This causes undefined behavior.
 
-## Binary Tree
+## Pointer Assignment
 
-- A Binary Tree is a special form of tree. In a binary tree, every node has at most two children nodes.
+```c
+int i, j, *p, *q;
 
-## Full Binary Tree
+i = 6;
+j = 7;
 
-- A full binary tree is one in which every leaf node has the same depth, and every non-leaf has exactly two children.
+p = &i; // take address of i and assign it to p (p points to i)
+q = p; // take address stored in p and assign it to q (q points to i)
 
-## Binary Search Tree
+q = &j // override address stored in q with the address of j (q points to j)
 
-- A Binary Search Tree is a type of Binary Tree with specific properties that make them very efficient to search for a value in the tree.
+// note: be careful with the following
+q = p; // pointer assignment (q points to i once more)
+q = &j // take the address of j and assign it to q (q points to j, again)
 
-- For every node X in the tree:
-    - All nodes in X's left subtree must be less than X.
-    - All nodes in X's right subtree must be greater than X.
+*q = *p; // copies the value that p points to into the object that q points to (the value of both i and j is now 6)
+```
 
-# Binary Search Tree Operations
+## Pointers as Arguments
 
-- Determine if the binary search tree is empty.
-- Search the binary search tree for a value.
-- Insert an item in the binary search tree.
-- Delete an item from the binary search tree.
-- Find the height of the binary search tree.
-- Find the number of nodes and leaves in the binary search tree.
-- Traverse the binary search tree.
-- Free the memory used by the binary search tree.
+- A variable supplied as an argument in a function call is protected against change, because C passes arguments by value.
 
+- We can use pointers as arguments to circumvent this:
+
+```c
+void decompose(double x, long *int_part, double *frac_part) {
+    *int_part = (long)x;
+    *fract_part = x - *int_part;
+}
+
+int i = 5;
+int d = 5;
+
+// pass the address of i and d
+void decompose(3.14159, &i, &d);
+```
+
+## Pointers as return types
+
+- Never return a pointer to an automatic local variable:
+
+```c
+int *f(void) {
+    int i;
+    // i does not exist once f returns, so the pointer to it will be invalid!
+    return &i;
+}
+```
+
+## Dynamic Storage Allocation
+
+- To allocate storage dynamically, we'll need to call one of the tree memory allocation functions declared in <stdlib.h>:
+
+```c
+#include <stdlib.h>
+
+malloc() // allocates a block of memory but does not initialize it
+calloc() // allocates a block of memory and clears it
+realloc() // resizes a previously allocated block of memory
+```
+
+- Malloc is the most used. When we call a memory allocation function to request a block of memory. The function has no idea what type of data we're planning to store in the block, so it can't return a pointer to an ordinary type. Instead, the function returns a value of type void* (a generic pointer, just a memory address).
+
+## Null Pointers
+
+- When a memory allocation function is called, there is always the possibility that it won't be able to locate a block of memory large enough to satisfy the request. If that occurs, the function will return a NULL pointer.
+
+- A NULL pointer is a pointer to nothing, a special value that can be distinguished from all valid pointers.
+
+- The null pointer is represented by a macro named NULL, so we can test malloc's return value:
+
+```c
+// some previously and properly declared variable p
+p = malloc(10000)
+if (p == NULL) {
+    // allocation failed, take proper action
+}
+```
