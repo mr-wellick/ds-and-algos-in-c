@@ -9,7 +9,7 @@ typedef struct Node {
   struct Node *right;
 } Node;
 
-//Node *createNode(int value);
+Node *createNode(int value);
 
 /* Big Oh of BST Insertion
  *

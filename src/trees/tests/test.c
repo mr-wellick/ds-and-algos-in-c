@@ -1,6 +1,5 @@
 #include "../../../unity/unity.h"
 #include "../trees.h"
-#include <stdlib.h>
 
 // Optional: Any setup code that needs to run before each test
 void setUp(void) {}
@@ -9,19 +8,13 @@ void setUp(void) {}
 void tearDown(void) {}
 
 void test_create_node(void) {
-  Node *root = (Node*)malloc(sizeof(Node));
-  root->value = 5;
-  root->left = NULL;
-  root->right = NULL;
+  Node *root = createNode(5);
 
   TEST_ASSERT_EQUAL_INT(5, root->value);
   TEST_ASSERT_NULL(root->left);
   TEST_ASSERT_NULL(root->right);
 
   demolish(root);
-  printf("test %d\n", root->value);
-  printf("test %p\n", root->left);
-  printf("test %p\n", root->right);
   TEST_ASSERT_NULL(root);
 }
 
