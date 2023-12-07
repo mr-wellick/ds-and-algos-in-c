@@ -1,4 +1,4 @@
-# Practice tree knowlege while learning C
+# Practice Data Structures & Algorithms while learning C
 
 ## Pointer Basics
 
