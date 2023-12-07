@@ -146,3 +146,39 @@ if (p == NULL) {
     // allocation failed, take proper action
 }
 ```
+
+- In C, pointers test true or false in the same way as numbers. All non-null pointers test true; only null pointers are false.
+
+- Malloc and the other memory allocation functions obtain memory blocks from a storage pool known as the heap.
+
+- A block of memory that is no longer accessible to a program is said to be garbage (memory leak). Some languages provide a garbage collector. C does not!
+
+## Free function
+
+- Calling free releases the block of memory that p points to:
+
+```c
+p = malloc(...)
+q = malloc(...)
+free(p)
+
+p = q;
+```
+
+- The argument to free must be a pointer that was returned using malloc, calloc, realloc. Anything else causes undefined behavior.
+
+## The dangling pointer
+
+- Although the function allows us to reclaim memory that's no longer needed, using it leads to a new problem: dangling pointers.
+
+- The call to free(p) deallocates the memory block that p points to but doesn't change p itself. If we forget that p no longer points to a valid memory block, chaos may ensue:
+
+```c
+char *p = malloc(4)
+free(p)
+
+// WRONG!
+strcpy(p, "abc")
+```
+
+- Attempting to access or modify a deallocated memory block causes undefined behavior.
