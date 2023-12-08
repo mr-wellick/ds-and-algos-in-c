@@ -182,3 +182,20 @@ strcpy(p, "abc")
 ```
 
 - Attempting to access or modify a deallocated memory block causes undefined behavior.
+
+- Be careful to give sizeof() the name of the type to be allocated and not the name of a pointer to that type:
+
+```c
+typedef struct Node {
+    int value;
+    struct Node *next;
+} Node;
+
+Node *root = NULL;
+
+// Correct
+new_node = malloc(sizeof(Node))
+
+// Incorrect
+new_node = malloc(sizeof(root))
+```
