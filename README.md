@@ -146,3 +146,83 @@ if (p == NULL) {
     // allocation failed, take proper action
 }
 ```
+
+- In C, pointers test true or false in the same way as numbers. All non-null pointers test true; only null pointers are false.
+
+- Malloc and the other memory allocation functions obtain memory blocks from a storage pool known as the heap.
+
+- A block of memory that is no longer accessible to a program is said to be garbage (memory leak). Some languages provide a garbage collector. C does not!
+
+## Free function
+
+- Calling free releases the block of memory that p points to:
+
+```c
+p = malloc(...)
+q = malloc(...)
+free(p)
+
+p = q;
+```
+
+- The argument to free must be a pointer that was returned using malloc, calloc, realloc. Anything else causes undefined behavior.
+
+## The dangling pointer
+
+- Although the function allows us to reclaim memory that's no longer needed, using it leads to a new problem: dangling pointers.
+
+- The call to free(p) deallocates the memory block that p points to but doesn't change p itself. If we forget that p no longer points to a valid memory block, chaos may ensue:
+
+```c
+char *p = malloc(4)
+free(p)
+
+// WRONG!
+strcpy(p, "abc")
+```
+
+- Attempting to access or modify a deallocated memory block causes undefined behavior.
+
+- Be careful to give sizeof() the name of the type to be allocated and not the name of a pointer to that type:
+
+```c
+typedef struct Node {
+    int value;
+    struct Node *next;
+} Node;
+
+Node *root = NULL;
+
+// Correct
+new_node = malloc(sizeof(Node))
+
+// Incorrect
+new_node = malloc(sizeof(root))
+```
+## Pointers to Pointers
+
+- When an argument to a function is a pointer, we sometimes want the function to be able to modify the variable by making it point somewhere else.
+
+- Doing so requires the use of a pointer to a pointer.
+
+```c
+// Pointers like all arguments are passed by VALUE!
+struct node *add_to_list(struct node *list, int n);
+// At the point of the call, linked_list is copied into list.
+add_to_list(linked_list, 10)
+
+// Updated to include a double pointer
+void add_to_list(struct node **list, int n) {
+    struct node *new_node = malloc(sizeof(struct node));
+
+    if (!new_node) {
+        printf("error\n");
+        exit(EXIT_FAILURE);
+    }
+    new_node->value = n;
+    new_node->next = *list;
+
+    *list = new_node;
+}
+
+```
