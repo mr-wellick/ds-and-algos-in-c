@@ -10,10 +10,12 @@ typedef struct Node {
 
 Node *createNode(int value);
 
-Node *insert(Node *list, int value);
+Node *insertNode(Node *list, int value);
 
 void printList(Node *list);
 
 Node *searchList(Node *list, int value) ;
+
+Node *deleteNode(Node *list, int value);
 
 #endif
