@@ -14,7 +14,6 @@ Node *createNode(int value) {
   return node;
 }
 
-// does node modify the list pointer
 void insertNode(Node **list, int value) {
   Node *new_node = createNode(value);
   new_node->next = *list;
@@ -22,8 +21,6 @@ void insertNode(Node **list, int value) {
   *list = new_node;
 }
 
-// since list is a copy of the original list pointer, there is no harm in
-// changing it within the function
 void printList(Node *list) {
   if (!list) {
     printf("nothining to print\n");
