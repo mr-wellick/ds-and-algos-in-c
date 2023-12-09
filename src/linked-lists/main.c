@@ -3,13 +3,13 @@
 
 int main(void) {
   Node *list = NULL;
-  list = insertNode(list, 10);
-  list = insertNode(list, 5);
-  list = insertNode(list, 15);
+  insertNode(&list, 10);
+  insertNode(&list, 5);
+  insertNode(&list, 15);
 
   printList(list);
-  list = deleteNode(list, 5);
-  printList(list);
+  //list = deleteNode(list, 5);
+  //printList(list);
 
   return 0;
 }

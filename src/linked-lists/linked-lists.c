@@ -15,11 +15,11 @@ Node *createNode(int value) {
 }
 
 // does node modify the list pointer
-Node *insertNode(Node *list, int value) {
+void insertNode(Node **list, int value) {
   Node *new_node = createNode(value);
-  new_node->next = list;
+  new_node->next = *list;
 
-  return new_node;
+  *list = new_node;
 }
 
 // since list is a copy of the original list pointer, there is no harm in

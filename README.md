@@ -199,3 +199,30 @@ new_node = malloc(sizeof(Node))
 // Incorrect
 new_node = malloc(sizeof(root))
 ```
+## Pointers to Pointers
+
+- When an argument to a function is a pointer, we sometimes want the function to be able to modify the variable by making it point somewhere else.
+
+- Doing so requires the use of a pointer to a pointer.
+
+```c
+// Pointers like all arguments are passed by VALUE!
+struct node *add_to_list(struct node *list, int n);
+// At the point of the call, linked_list is copied into list.
+add_to_list(linked_list, 10)
+
+// Updated to include a double pointer
+void add_to_list(struct node **list, int n) {
+    struct node *new_node = malloc(sizeof(struct node));
+
+    if (!new_node) {
+        printf("error\n");
+        exit(EXIT_FAILURE);
+    }
+    new_node->value = n;
+    new_node->next = *list;
+
+    *list = new_node;
+}
+
+```

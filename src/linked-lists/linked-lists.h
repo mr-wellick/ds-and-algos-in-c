@@ -10,7 +10,7 @@ typedef struct Node {
 
 Node *createNode(int value);
 
-Node *insertNode(Node *list, int value);
+void insertNode(Node **list, int value);
 
 void printList(Node *list);
 
