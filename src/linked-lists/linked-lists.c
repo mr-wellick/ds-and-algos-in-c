@@ -22,6 +22,7 @@ Node *insert(Node *list, int value) {
   return new_node;
 }
 
+// since list is a copy of the original list pointer, there is no harm in changing it within the function
 void printList(Node *list) {
   if (!list) {
     printf("nothining to print\n");
@@ -34,13 +35,10 @@ void printList(Node *list) {
   }
 }
 
-int searchList(Node *list, int value) {
-  while (list) {
-    if (list->value == value) {
-      return list->value;
-    }
+Node *searchList(Node *list, int value) {
+  while (list && list->value != value) {
     list = list->next;
   }
 
-  return -1;
+  return list;
 }

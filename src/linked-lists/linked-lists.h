@@ -14,6 +14,6 @@ Node *insert(Node *list, int value);
 
 void printList(Node *list);
 
-int searchList(Node *list, int value) ;
+Node *searchList(Node *list, int value) ;
 
 #endif
