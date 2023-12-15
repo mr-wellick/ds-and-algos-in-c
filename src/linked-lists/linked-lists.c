@@ -16,32 +16,49 @@ Node *createNode(int value) {
   return node;
 }
 
-// inserts to the begining of a linked list only
-void insertNode(Node **list, int value) {
-  Node *new_node = createNode(value);
-  new_node->next = *list;
-  new_node->prev = NULL;
+DoublyLinkedList *initList() {
+  DoublyLinkedList *list = malloc(sizeof(DoublyLinkedList));
 
-  if (*list) {
-    (*list)->prev = new_node;
+  if (!list) {
+    printf("Error: malloc failed in createNode()");
+    exit(EXIT_FAILURE);
   }
 
-  *list = new_node;
+  list->head = NULL;
+  list->tail = NULL;
+
+  return list;
 }
 
-//void printList(Node **list) {
-//  if (!*list) {
-//    printf("nothining to print\n");
-//    return;
-//  }
+
+// inserts to the begining of a linked list only
+void insertNode(DoublyLinkedList **list, int value) {
+  Node *new_node = createNode(value);
+
+  if (!list) {
+    (*list)->head = new_node;
+    (*list)->tail = new_node;
+    return;
+  } else {
+    new_node->next = (*list)->head;
+    (*list)->head->prev = new_node;
+    (*list)->head = new_node;
+  }
+}
+
+// void printList(Node **list) {
+//   if (!*list) {
+//     printf("nothining to print\n");
+//     return;
+//   }
 //
-//  while (*list) {
-//    printf("The value is: %d\n", (*list)->value);
-//    printf("The node->next %p\n", (*list)->next);
-//    printf("The node->prev %p\n", (*list)->prev);
-//    *list = (*list)->next;
-//  }
-//}
+//   while (*list) {
+//     printf("The value is: %d\n", (*list)->value);
+//     printf("The node->next %p\n", (*list)->next);
+//     printf("The node->prev %p\n", (*list)->prev);
+//     *list = (*list)->next;
+//   }
+// }
 
 // Node *searchList(Node *list, int value) {
 //   while (list && list->value != value) {

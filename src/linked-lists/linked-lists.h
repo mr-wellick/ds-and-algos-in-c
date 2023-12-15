@@ -16,11 +16,13 @@ typedef struct DoublyLinkedList {
 
 Node *createNode(int value);
 
-void insertNode(Node **list, int value);
+void insertNode(DoublyLinkedList **list, int value);
 
-Node deleteNode(Node **list, int value);
+DoublyLinkedList *initList();
 
-void printList(Node **list);
+//Node deleteNode(Node **list, int value);
+
+//void printList(Node **list);
 
 // Node *searchList(Node *list, int value) ;
 
