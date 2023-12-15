@@ -16,9 +16,10 @@ typedef struct DoublyLinkedList {
 
 Node *createNode(int value);
 
+DoublyLinkedList *initList();
+
 void insertNode(DoublyLinkedList **list, int value);
 
-DoublyLinkedList *initList();
 
 //Node deleteNode(Node **list, int value);
 

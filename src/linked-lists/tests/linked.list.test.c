@@ -32,6 +32,7 @@ void insert_into_doubly_linked_list(void) {
 
   TEST_ASSERT_NOT_NULL(list->head);
   TEST_ASSERT_NOT_NULL(list->tail);
+  TEST_ASSERT_EQUAL_PTR(list->head, list->tail);
 }
 
 int main(void) {
