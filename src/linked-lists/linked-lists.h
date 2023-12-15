@@ -6,16 +6,22 @@
 typedef struct Node {
   int value;
   struct Node *next;
+  struct Node *prev;
 } Node;
+
+typedef struct DoublyLinkedList {
+  struct Node *head;
+  struct Node *tail;
+} DoublyLinkedList;
 
 Node *createNode(int value);
 
 void insertNode(Node **list, int value);
 
-void printList(Node *list);
+Node deleteNode(Node **list, int value);
 
-Node *searchList(Node *list, int value) ;
+void printList(Node **list);
 
-Node *deleteNode(Node *list, int value);
+// Node *searchList(Node *list, int value) ;
 
 #endif

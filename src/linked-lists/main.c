@@ -7,7 +7,7 @@ int main(void) {
   insertNode(&list, 5);
   insertNode(&list, 15);
 
-  printList(list);
+  printList(&list);
   //list = deleteNode(list, 5);
   //printList(list);
 
