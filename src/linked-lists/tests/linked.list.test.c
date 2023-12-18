@@ -22,26 +22,32 @@ void init_doubly_linked_list(void) {
   TEST_ASSERT_NULL(list->tail);
 }
 
-void insert_into_doubly_linked_list(void) {
+// todo
+void doubly_linked_list() {
   DoublyLinkedList *list = initList();
   insertNode(&list, 5);
+  insertNode(&list, 2);
+  insertNode(&list, 33);
 
-  TEST_ASSERT_EQUAL_INT(5, list->head->value);
-  TEST_ASSERT_NULL(list->head->next);
+  TEST_ASSERT_EQUAL_INT(33, list->head->value);
+  TEST_ASSERT_NOT_NULL(list->head->next);
   TEST_ASSERT_NULL(list->head->prev);
 
-  TEST_ASSERT_NOT_NULL(list->head);
-  TEST_ASSERT_NOT_NULL(list->tail);
-  TEST_ASSERT_EQUAL_PTR(list->head, list->tail);
-}
+  TEST_ASSERT_EQUAL_INT(5, list->tail->value);
+  TEST_ASSERT_NULL(list->tail->next);
+  TEST_ASSERT_NOT_NULL(list->tail->prev);
 
-// todo
-void insert_multiple_values_into_doubly_linked_list() {}
+  while (list->head) {
+    TEST_ASSERT_NOT_NULL(list->head);
+    list->head = list->head->next;
+  }
+}
 
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_node);
   RUN_TEST(init_doubly_linked_list);
+  RUN_TEST(doubly_linked_list);
   UNITY_END();
 
   return 0;

@@ -20,7 +20,7 @@ DoublyLinkedList *initList() {
   DoublyLinkedList *list = malloc(sizeof(DoublyLinkedList));
 
   if (!list) {
-    printf("Error: malloc failed in createNode()");
+    printf("Error: malloc failed in initList()");
     exit(EXIT_FAILURE);
   }
 
@@ -30,19 +30,20 @@ DoublyLinkedList *initList() {
   return list;
 }
 
-
 // inserts to the begining of a linked list only
 void insertNode(DoublyLinkedList **list, int value) {
   Node *new_node = createNode(value);
 
-  if (!list) {
-    (*list)->head = new_node;
-    (*list)->tail = new_node;
-    return;
-  } else {
+  // is there a case where this is not true?
+  // how to simplify logic ?
+  // review notes
+  if ((*list)->head && (*list)->tail) {
     new_node->next = (*list)->head;
     (*list)->head->prev = new_node;
     (*list)->head = new_node;
+  } else {
+    (*list)->head = new_node;
+    (*list)->tail = new_node;
   }
 }
 
