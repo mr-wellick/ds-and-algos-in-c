@@ -78,14 +78,14 @@ void insert(Node **list, int value) {
 }
 
 void printList(Node **list) {
-  printf("\n");
-  printf("The address of head: %p\n", (*list)->next);
-  printf("The address of tail: %p\n\n", (*list)->prev);
 
   if (!(*list)->next) {
     printf("nothing to print\n");
     return;
   }
+
+  printf("The address of head: %p\n", (*list)->next);
+  printf("The address of tail: %p\n\n", (*list)->prev);
 
   Node *p = (*list)->next;
   while (p) {
