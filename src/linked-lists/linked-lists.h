@@ -9,17 +9,9 @@ typedef struct Node {
   struct Node *prev;
 } Node;
 
-typedef struct DoublyLinkedList {
-  struct Node *head;
-  struct Node *tail;
-} DoublyLinkedList;
-
 Node *createNode(int value);
 
-DoublyLinkedList *initList();
-
-void insertNode(DoublyLinkedList **list, int value);
-
+void insertNode(Node **list, int value);
 
 //Node deleteNode(Node **list, int value);
 

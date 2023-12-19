@@ -15,33 +15,32 @@ void test_create_node(void) {
   TEST_ASSERT_NULL(list->prev);
 }
 
-void init_doubly_linked_list(void) {
-  DoublyLinkedList *list = initList();
+void doubly_linked_list() {
+  Node *dummy_head = createNode(0);
 
-  TEST_ASSERT_NULL(list->head);
-  TEST_ASSERT_NULL(list->tail);
+  // insert a single node into list
+  insertNode(&dummy_head, 5);
+  insertNode(&dummy_head, 14);
+  insertNode(&dummy_head, 23);
+  insertNode(&dummy_head, 100);
+
+  printf("The address of head: %p\n", dummy_head->next);
+  printf("The address of tail: %p\n\n", dummy_head->prev);
+
+  Node *p = dummy_head->next;
+  while (p) {
+    printf("The address of current: %p\n", p);
+    printf("The value is: %d \n", p->value);
+    printf("The address of next: %p \n", p->next);
+    printf("The address of prev: %p \n\n", p->prev);
+    p = p->next;
+  }
 }
-
-void insert_into_doubly_linked_list(void) {
-  DoublyLinkedList *list = initList();
-  insertNode(&list, 5);
-
-  TEST_ASSERT_EQUAL_INT(5, list->head->value);
-  TEST_ASSERT_NULL(list->head->next);
-  TEST_ASSERT_NULL(list->head->prev);
-
-  TEST_ASSERT_NOT_NULL(list->head);
-  TEST_ASSERT_NOT_NULL(list->tail);
-  TEST_ASSERT_EQUAL_PTR(list->head, list->tail);
-}
-
-// todo
-void insert_multiple_values_into_doubly_linked_list() {}
 
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_node);
-  RUN_TEST(init_doubly_linked_list);
+  RUN_TEST(doubly_linked_list);
   UNITY_END();
 
   return 0;

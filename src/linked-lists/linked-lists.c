@@ -16,35 +16,37 @@ Node *createNode(int value) {
   return node;
 }
 
-DoublyLinkedList *initList() {
-  DoublyLinkedList *list = malloc(sizeof(DoublyLinkedList));
-
-  if (!list) {
-    printf("Error: malloc failed in createNode()");
-    exit(EXIT_FAILURE);
-  }
-
-  list->head = NULL;
-  list->tail = NULL;
-
-  return list;
-}
-
-
-// inserts to the begining of a linked list only
-void insertNode(DoublyLinkedList **list, int value) {
+void insertNode(Node **list, int value) {
   Node *new_node = createNode(value);
 
-  if (!list) {
-    (*list)->head = new_node;
-    (*list)->tail = new_node;
-    return;
+  if (!(*list)->next) {
+    // if our list is empty -> add to front
+    new_node->next = (*list)->next;
+    (*list)->next = new_node;
+    (*list)->prev = new_node;
+  } else if ((*list)->next) {
+    // if node belongs to top of list containing 1 or more nodes -> add to front
+    new_node->next = (*list)->next;
+    (*list)->next->prev = new_node;
+    (*list)->next = new_node;
   } else {
-    new_node->next = (*list)->head;
-    (*list)->head->prev = new_node;
-    (*list)->head = new_node;
+    // if node belongs in the middle
+    // 	-> use traversal loop to find the node just ABOVE where you want to
+    // insert our new item
+    // 	-> allocate and fill new node
+    // 	-> link new node into the list right after the ABOVE node
   }
+
+  // if add to end
+  // 	-> use a temp var to traverse list to end
+  // 	-> update last entry to point to new node
+  // 	-> set new_node->next = NULL
 }
+
+// two cases
+// 1. list is empty
+// 2. existing list has one or more nodes
+// void insertToEnd();
 
 // void printList(Node **list) {
 //   if (!*list) {
