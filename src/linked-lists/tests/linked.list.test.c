@@ -46,7 +46,7 @@ void insert_to_middle() {
   insert(&dummy_head, 3);
   insert(&dummy_head, 50);
 
-  //printList(&dummy_head);
+  // printList(&dummy_head);
 }
 
 void middle() {
@@ -60,6 +60,53 @@ void middle() {
   insert(&dummy_head, 3);
   insert(&dummy_head, 5);
 
+  // printList(&dummy_head);
+}
+
+void delete_single_node() {
+  Node *dummy_head = createNode(0);
+
+  insert(&dummy_head, 1);
+
+  // printList(&dummy_head);
+  deleteNode(&dummy_head, 1);
+  // printList(&dummy_head);
+}
+
+void delete_middle_node() {
+  Node *dummy_head = createNode(0);
+
+  insert(&dummy_head, 5);
+  insert(&dummy_head, 40);
+  insert(&dummy_head, 1);
+
+  // printList(&dummy_head);
+  deleteNode(&dummy_head, 5);
+  // printList(&dummy_head);
+}
+
+void delete_last_node() {
+  Node *dummy_head = createNode(0);
+
+  insert(&dummy_head, 5);
+  insert(&dummy_head, 40);
+  insert(&dummy_head, 1);
+
+  // printList(&dummy_head);
+  deleteNode(&dummy_head, 40);
+  // printList(&dummy_head);
+}
+
+void delete_all_nodes() {
+  Node *dummy_head = createNode(0);
+
+  insert(&dummy_head, 5);
+  insert(&dummy_head, 40);
+  insert(&dummy_head, 1);
+
+  deleteNode(&dummy_head, 40);
+  deleteNode(&dummy_head, 1);
+  deleteNode(&dummy_head, 5);
   printList(&dummy_head);
 }
 
@@ -70,6 +117,10 @@ int main(void) {
   RUN_TEST(test_insert_at_rear);
   RUN_TEST(insert_to_middle);
   RUN_TEST(middle);
+  RUN_TEST(delete_single_node);
+  RUN_TEST(delete_middle_node);
+  RUN_TEST(delete_last_node);
+  RUN_TEST(delete_all_nodes);
   UNITY_END();
 
   return 0;
