@@ -109,15 +109,16 @@ void deleteNode(Node **list, int value) {
     return;
   }
 
+  // beginning of list
   if (!parent) {
     // point to new head
     (*list)->next = curr->next;
 
-    // only one node
+    // more than 1 node
     if (curr->next) {
       curr->next->prev = NULL;
     } else {
-      // more than 1 node
+      // only one node
       (*list)->prev = NULL;
     }
   } else {
