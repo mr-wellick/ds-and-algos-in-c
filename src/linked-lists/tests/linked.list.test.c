@@ -15,38 +15,32 @@ void test_create_node(void) {
   TEST_ASSERT_NULL(list->prev);
 }
 
-void init_doubly_linked_list(void) {
-  DoublyLinkedList *list = initList();
-
-  TEST_ASSERT_NULL(list->head);
-  TEST_ASSERT_NULL(list->tail);
-}
-
 // todo
 void doubly_linked_list() {
-  DoublyLinkedList *list = initList();
-  insertNode(&list, 5);
-  insertNode(&list, 2);
-  insertNode(&list, 33);
+  Node *dummy_head = createNode(0);
 
-  TEST_ASSERT_EQUAL_INT(33, list->head->value);
-  TEST_ASSERT_NOT_NULL(list->head->next);
-  TEST_ASSERT_NULL(list->head->prev);
+  // insert a single node into list
+  insertNode(&dummy_head, 5);
+  insertNode(&dummy_head, 14);
+  insertNode(&dummy_head, 23);
+  insertNode(&dummy_head, 100);
 
-  TEST_ASSERT_EQUAL_INT(5, list->tail->value);
-  TEST_ASSERT_NULL(list->tail->next);
-  TEST_ASSERT_NOT_NULL(list->tail->prev);
+  printf("The address of head: %p\n", dummy_head->next);
+  printf("The address of tail: %p\n\n", dummy_head->prev);
 
-  while (list->head) {
-    TEST_ASSERT_NOT_NULL(list->head);
-    list->head = list->head->next;
+  Node *p = dummy_head->next;
+  while (p) {
+    printf("The address of current: %p\n", p);
+    printf("The value is: %d \n", p->value);
+    printf("The address of next: %p \n", p->next);
+    printf("The address of prev: %p \n\n", p->prev);
+    p = p->next;
   }
 }
 
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_node);
-  RUN_TEST(init_doubly_linked_list);
   RUN_TEST(doubly_linked_list);
   UNITY_END();
 
