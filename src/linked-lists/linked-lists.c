@@ -78,12 +78,12 @@ void insert(Node **list, int value) {
 }
 
 void printList(Node **list) {
+
   if (!(*list)->next) {
     printf("nothing to print\n");
     return;
   }
 
-  printf("\n");
   printf("The address of head: %p\n", (*list)->next);
   printf("The address of tail: %p\n\n", (*list)->prev);
 
@@ -98,29 +98,40 @@ void printList(Node **list) {
   }
 }
 
-// Node *searchList(Node *list, int value) {
-//   while (list && list->value != value) {
-//     list = list->next;
-//   }
-//
-//   return list;
-// }
+void deleteNode(Node **list, int value) {
+  Node *curr = (*list)->next;
+  Node *parent = NULL;
 
-// Node deleteNode(Node **list, int value) {
-//   Node *curr = list;
-//   Node *parent = NULL;
-//
-//   for (; curr && curr->value != value; parent = curr, curr = curr->next)
-//     ;
-//
-//   if (!curr) {
-//     return;
-//   }
-//   if (!parent) {
-//     list = list->next;
-//   } else {
-//     parent->next = curr->next;
-//   }
-//
-//   free(curr);
-// }
+  for (; curr && curr->value != value; parent = curr, curr = curr->next)
+    ;
+
+  if (!curr) {
+    return;
+  }
+
+  // beginning of list
+  if (!parent) {
+    // point to new head
+    (*list)->next = curr->next;
+
+    // more than 1 node
+    if (curr->next) {
+      curr->next->prev = NULL;
+    } else {
+      // only one node
+      (*list)->prev = NULL;
+    }
+  } else {
+    parent->next = curr->next;
+
+    // somewhere in the middle
+    if (curr->next) {
+      curr->next->prev = parent;
+    } else {
+      // at the end of the list: update tail pointer
+      (*list)->prev = parent;
+    }
+  }
+
+  free(curr);
+}
