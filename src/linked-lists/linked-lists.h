@@ -11,12 +11,15 @@ typedef struct Node {
 
 Node *createNode(int value);
 
-void insertNode(Node **list, int value);
+void insertAtHead(Node **list, int value);
+
+void insertAtRear(Node **list, int value);
+
+void insert(Node **list, int value);
+
+void printList(Node **list);
 
 //Node deleteNode(Node **list, int value);
-
-//void printList(Node **list);
-
 // Node *searchList(Node *list, int value) ;
 
 #endif
