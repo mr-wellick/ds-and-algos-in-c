@@ -1,15 +1,13 @@
 #include "linked-lists.h"
-#include <stdio.h>
 
 int main(void) {
-  Node *list = NULL;
-  insertNode(&list, 10);
-  insertNode(&list, 5);
-  insertNode(&list, 15);
+  Node *dummy_head = createNode(0);
 
-  printList(&list);
-  //list = deleteNode(list, 5);
-  //printList(list);
+  insert(&dummy_head, 1);
+  insert(&dummy_head, 5);
+  insert(&dummy_head, -4);
+
+  printList(&dummy_head);
 
   return 0;
 }

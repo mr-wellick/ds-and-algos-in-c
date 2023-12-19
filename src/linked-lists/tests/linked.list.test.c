@@ -110,6 +110,10 @@ void delete_all_nodes() {
   printList(&dummy_head);
 }
 
+// todo: what if a value already exists in our doubly linked list? -> don't insert
+// todo: look into how to test linked list to write better tests
+// todo: create method to destroy linked list in one function call destroy(&list);
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_node);
