@@ -16,21 +16,16 @@ Node *createNode(int value) {
   return node;
 }
 
-// inserts to the begining of a linked list only
-// 1. we can add to the beginning of the list
-// 2. we can add to the middle of the list
-// 3. we can add to the end of the list
 void insertNode(Node **list, int value) {
   Node *new_node = createNode(value);
 
-  // if node belongs to top of list & list contains 1 or more nodes ->
-  // insertToFront()
+  // if node belongs to top of list containing 1 or more nodes -> add to front
   if ((*list)->next) {
     new_node->next = (*list)->next;
     (*list)->next->prev = new_node;
     (*list)->next = new_node;
   } else {
-    // if our list is empty -> insertToFront()
+    // if our list is empty -> add to front
     new_node->next = (*list)->next;
     (*list)->next = new_node;
     (*list)->prev = new_node;
