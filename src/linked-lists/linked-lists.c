@@ -19,23 +19,23 @@ Node *createNode(int value) {
 void insertNode(Node **list, int value) {
   Node *new_node = createNode(value);
 
-  // if node belongs to top of list containing 1 or more nodes -> add to front
-  if ((*list)->next) {
-    new_node->next = (*list)->next;
-    (*list)->next->prev = new_node;
-    (*list)->next = new_node;
-  } else {
+  if (!(*list)->next) {
     // if our list is empty -> add to front
     new_node->next = (*list)->next;
     (*list)->next = new_node;
     (*list)->prev = new_node;
+  } else if ((*list)->next) {
+    // if node belongs to top of list containing 1 or more nodes -> add to front
+    new_node->next = (*list)->next;
+    (*list)->next->prev = new_node;
+    (*list)->next = new_node;
+  } else {
+    // if node belongs in the middle
+    // 	-> use traversal loop to find the node just ABOVE where you want to
+    // insert our new item
+    // 	-> allocate and fill new node
+    // 	-> link new node into the list right after the ABOVE node
   }
-
-  // if node belongs in the middle
-  // 	-> use traversal loop to find the node just ABOVE where you want to
-  // insert our new item
-  // 	-> allocate and fill new node
-  // 	-> link new node into the list right after the ABOVE node
 
   // if add to end
   // 	-> use a temp var to traverse list to end

@@ -15,7 +15,6 @@ void test_create_node(void) {
   TEST_ASSERT_NULL(list->prev);
 }
 
-// todo
 void doubly_linked_list() {
   Node *dummy_head = createNode(0);
 
