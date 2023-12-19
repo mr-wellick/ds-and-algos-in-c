@@ -78,8 +78,8 @@ void insert(Node **list, int value) {
 }
 
 void printList(Node **list) {
-  if (!*list) {
-    printf("nothining to print\n");
+  if (!(*list)->next) {
+    printf("nothing to print\n");
     return;
   }
 

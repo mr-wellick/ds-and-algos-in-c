@@ -51,6 +51,7 @@ void insert_to_middle() {
 
 void middle() {
   Node *dummy_head = createNode(0);
+
   insert(&dummy_head, 1);
   insert(&dummy_head, 4);
   insert(&dummy_head, 50);
