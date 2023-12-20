@@ -64,9 +64,13 @@ void insert(Node **list, int value) {
   } else {
     // add somewhere in the middle
     Node *p = (*list)->next;
+
     while (p) {
-      if (value < p->value)
+      if (value < p->value) {
         break;
+      } else if (value == p->value) {
+        return;
+      }
       p = p->next;
     }
 
@@ -78,7 +82,6 @@ void insert(Node **list, int value) {
 }
 
 void printList(Node **list) {
-
   if (!(*list)->next) {
     printf("nothing to print\n");
     return;
