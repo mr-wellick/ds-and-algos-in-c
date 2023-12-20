@@ -13,6 +13,8 @@ void test_create_node(void) {
   TEST_ASSERT_EQUAL_INT(5, list->value);
   TEST_ASSERT_NULL(list->next);
   TEST_ASSERT_NULL(list->prev);
+
+  free(list);
 }
 
 void test_insert_at_head() {
@@ -21,6 +23,8 @@ void test_insert_at_head() {
 
   TEST_ASSERT_EQUAL_INT(5, dummy_head->next->value);
   TEST_ASSERT_EQUAL_PTR(dummy_head->next, dummy_head->prev);
+
+  demolish(&dummy_head);
 }
 
 void test_insert_at_rear() {
@@ -34,10 +38,10 @@ void test_insert_at_rear() {
   TEST_ASSERT_EQUAL_INT(15, dummy_head->prev->value);
   TEST_ASSERT_NOT_EQUAL(dummy_head->next, dummy_head->prev);
 
-  // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
-void insert_to_middle() {
+void test_insertion_methods() {
   Node *dummy_head = createNode(0);
   insertAtHead(&dummy_head, 1);
   insertAtRear(&dummy_head, 2);
@@ -47,9 +51,10 @@ void insert_to_middle() {
   insert(&dummy_head, 50);
 
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
-void middle() {
+void test_insert() {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 1);
@@ -61,19 +66,22 @@ void middle() {
   insert(&dummy_head, 5);
 
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
-void delete_single_node() {
+void test_delete_single_node() {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 1);
 
   // printList(&dummy_head);
   deleteNode(&dummy_head, 1);
+  deleteNode(&dummy_head, 1);
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
-void delete_middle_node() {
+void test_delete_middle_node() {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 5);
@@ -83,9 +91,10 @@ void delete_middle_node() {
   // printList(&dummy_head);
   deleteNode(&dummy_head, 5);
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
-void delete_last_node() {
+void test_delete_last_node() {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 5);
@@ -95,9 +104,10 @@ void delete_last_node() {
   // printList(&dummy_head);
   deleteNode(&dummy_head, 40);
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
-void delete_all_nodes() {
+void test_delete_all_nodes() {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 5);
@@ -107,6 +117,36 @@ void delete_all_nodes() {
   deleteNode(&dummy_head, 40);
   deleteNode(&dummy_head, 1);
   deleteNode(&dummy_head, 5);
+
+  // printList(&dummy_head);
+  demolish(&dummy_head);
+}
+
+void test_insert_duplicate_node() {
+  Node *dummy_head = createNode(0);
+
+  insert(&dummy_head, 5);
+  insert(&dummy_head, 5);
+  demolish(&dummy_head);
+
+  // printList(&dummy_head);
+}
+
+void test_demolish_list() {
+  Node *dummy_head = createNode(0);
+
+  demolish(&dummy_head);
+
+  insert(&dummy_head, 1);
+  insert(&dummy_head, 4);
+  insert(&dummy_head, 50);
+  insert(&dummy_head, 2);
+  insert(&dummy_head, 6);
+  insert(&dummy_head, 3);
+  insert(&dummy_head, 5);
+
+  demolish(&dummy_head);
+
   printList(&dummy_head);
 }
 
@@ -115,12 +155,14 @@ int main(void) {
   RUN_TEST(test_create_node);
   RUN_TEST(test_insert_at_head);
   RUN_TEST(test_insert_at_rear);
-  RUN_TEST(insert_to_middle);
-  RUN_TEST(middle);
-  RUN_TEST(delete_single_node);
-  RUN_TEST(delete_middle_node);
-  RUN_TEST(delete_last_node);
-  RUN_TEST(delete_all_nodes);
+  RUN_TEST(test_insertion_methods);
+  RUN_TEST(test_insert);
+  RUN_TEST(test_delete_single_node);
+  RUN_TEST(test_delete_middle_node);
+  RUN_TEST(test_delete_last_node);
+  RUN_TEST(test_delete_all_nodes);
+  RUN_TEST(test_insert_duplicate_node);
+  RUN_TEST(test_demolish_list);
   UNITY_END();
 
   return 0;
