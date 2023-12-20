@@ -138,3 +138,19 @@ void deleteNode(Node **list, int value) {
 
   free(curr);
 }
+
+void demolish(Node **list) {
+  if (!(*list)->next) {
+    printf("No list to destroy\n");
+    return;
+  }
+
+  Node *p = (*list)->prev;
+  while (p) {
+    p = p->prev;
+    free(p);
+  }
+
+  (*list)->next = NULL;
+  (*list)->prev = NULL;
+}

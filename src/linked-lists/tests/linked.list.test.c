@@ -13,6 +13,8 @@ void test_create_node(void) {
   TEST_ASSERT_EQUAL_INT(5, list->value);
   TEST_ASSERT_NULL(list->next);
   TEST_ASSERT_NULL(list->prev);
+
+  free(list);
 }
 
 void test_insert_at_head() {
@@ -21,6 +23,8 @@ void test_insert_at_head() {
 
   TEST_ASSERT_EQUAL_INT(5, dummy_head->next->value);
   TEST_ASSERT_EQUAL_PTR(dummy_head->next, dummy_head->prev);
+
+  demolish(&dummy_head);
 }
 
 void test_insert_at_rear() {
@@ -33,6 +37,8 @@ void test_insert_at_rear() {
   insertAtRear(&dummy_head, 15);
   TEST_ASSERT_EQUAL_INT(15, dummy_head->prev->value);
   TEST_ASSERT_NOT_EQUAL(dummy_head->next, dummy_head->prev);
+
+  demolish(&dummy_head);
 }
 
 void test_insertion_methods() {
@@ -45,6 +51,7 @@ void test_insertion_methods() {
   insert(&dummy_head, 50);
 
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
 void test_insert() {
@@ -59,6 +66,7 @@ void test_insert() {
   insert(&dummy_head, 5);
 
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
 void test_delete_single_node() {
@@ -70,6 +78,7 @@ void test_delete_single_node() {
   deleteNode(&dummy_head, 1);
   deleteNode(&dummy_head, 1);
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
 void test_delete_middle_node() {
@@ -82,6 +91,7 @@ void test_delete_middle_node() {
   // printList(&dummy_head);
   deleteNode(&dummy_head, 5);
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
 void test_delete_last_node() {
@@ -94,6 +104,7 @@ void test_delete_last_node() {
   // printList(&dummy_head);
   deleteNode(&dummy_head, 40);
   // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
 void test_delete_all_nodes() {
@@ -107,7 +118,8 @@ void test_delete_all_nodes() {
   deleteNode(&dummy_head, 1);
   deleteNode(&dummy_head, 5);
 
-  //printList(&dummy_head);
+  // printList(&dummy_head);
+  demolish(&dummy_head);
 }
 
 void test_insert_duplicate_node() {
@@ -115,12 +127,28 @@ void test_insert_duplicate_node() {
 
   insert(&dummy_head, 5);
   insert(&dummy_head, 5);
+  demolish(&dummy_head);
 
-  //printList(&dummy_head);
+  // printList(&dummy_head);
 }
 
-// insert todo: look into how to test linked list to write better tests todo:
-// create method to destroy linked list in one function call destroy(&list);
+void test_demolish_list() {
+  Node *dummy_head = createNode(0);
+
+  demolish(&dummy_head);
+
+  insert(&dummy_head, 1);
+  insert(&dummy_head, 4);
+  insert(&dummy_head, 50);
+  insert(&dummy_head, 2);
+  insert(&dummy_head, 6);
+  insert(&dummy_head, 3);
+  insert(&dummy_head, 5);
+
+  demolish(&dummy_head);
+
+  printList(&dummy_head);
+}
 
 int main(void) {
   UNITY_BEGIN();
@@ -134,6 +162,7 @@ int main(void) {
   RUN_TEST(test_delete_last_node);
   RUN_TEST(test_delete_all_nodes);
   RUN_TEST(test_insert_duplicate_node);
+  RUN_TEST(test_demolish_list);
   UNITY_END();
 
   return 0;
