@@ -8,6 +8,12 @@ int main(void) {
   insert(&dummy_head, -4);
 
   printList(&dummy_head);
+  demolish(&dummy_head);
+
+  free(dummy_head);
+  dummy_head = NULL;
+
+  printList(&dummy_head);
 
   return 0;
 }
