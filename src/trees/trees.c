@@ -16,84 +16,85 @@ Node *createNode(int value) {
   return rootNode;
 }
 
-// void insert(Node *curr, int value) {
-//   // if tree is empty, create root node, done.
-//   if (curr == NULL) {
-//     curr = createNode(value);
-//     return;
-//   }
-//
-//   for (;;) {
-//     // if value exists, we're done.
-//     if (value == curr->value) {
-//       return;
-//     }
-//
-//     // go left
-//     if (value < curr->value) {
-//       if (curr->left != NULL) {
-//         curr = curr->left;
-//       } else { // create node and insert into tree
-//         curr->left = createNode(value);
-//         return;
-//       }
-//       // go right
-//     } else if (value > curr->value) {
-//       if (curr->right != NULL) {
-//         curr = curr->right;
-//       } else { // create node and insert into tree
-//         curr->right = createNode(value);
-//         return;
-//       }
-//     }
-//   }
-// }
-//
-// void erase(Node *curr, int value) {
+void insert(Node **root, int value) {
+  // if tree is empty, create root node, done.
+  if (!(*root)) {
+    *root = createNode(value);
+    return;
+  }
+
+  Node *curr = *root;
+  for (;;) {
+    // if value exists, we're done.
+    if (value == curr->value) {
+      return;
+    }
+
+    // go left
+    if (value < curr->value) {
+      if (curr->left) {
+        curr = curr->left;
+      } else { // create node and insert into tree
+        curr->left = createNode(value);
+        return;
+      }
+      // go right
+    } else if (value > curr->value) {
+      if (curr->right) {
+        curr = curr->right;
+      } else { // create node and insert into tree
+        curr->right = createNode(value);
+        return;
+      }
+    }
+  }
+}
+
+// void erase(Node *root, int value) {
 //   // 1. find V in tree
-//   //     - use two pointers: curr and a parent pointer
+//   //     - use two pointers: root and a parent pointer
 //   // 2. if node found, delete from tree making sure to preserve the ordering
 //   // 	- 3 cases
 //   Node *parent = NULL;
-//   while (curr != NULL) {
-//     if (value == curr->value) {
+//   while (root != NULL) {
+//     if (value == root->value) {
 //       /* once we've found our target node, we have to delete it.
 //        *
 //        * - Case 1: our target node is a leaf (it has two sub-cases), which is
 //        a node with 0 children!
 //        * - Sub-case #1: The target node is NOT the root node
-//        * 	- Unlink parent node from the target node (curr) by setting the
+//        * 	- Unlink parent node from the target node (root) by setting the
 //        parent's appropriate link to NULL.
-//        *        - Delete the target (curr) node.
+//        *        - Delete the target (root) node.
 //        * - Sub-case #2: The target node is the root node
 //        *        - Set the root pointer to NULL
-//        *        - Then delete the target (curr) node
+//        *        - Then delete the target (root) node
 //        */
 //       if (!parent) {
 //       // BUG: Issue with pointer. Review how pointers/refs are passed to
 //       functions and diagram this code out to understand what's really
 //       happening
-//         free(curr);
-//         curr = NULL;
+//         free(root);
+//         root = NULL;
 //         return;
 //       } else {
-//         if (parent->right == curr) {
+//         if (parent->right == root) {
 //           parent->right = NULL;
-//         } else if(parent->left == curr){
+//         } else if(parent->left == root){
 //           parent->left = NULL;
 //         }
-//	free(curr);
+//	free(root);
 //	return;
 //       }
 //       // - Case 2: our target node has one child (it has two sub-cases)
 //       // 		- Sub case #1: The target node is NOT the root node
-//       // 			- Relink the parent node to the target (curr)
+//       // 			- Relink the parent node to the target (root)
 //       // node's only child.
-//       // 			- Then delete the target (curr) node.
+//       // 			- Then delete the target (root) node.
 //       // 		- Sub Case #2: The target node is the root node
-//       // 			- Relink the root pointer to the target (curr)
+//       // 			- Relink the root pointer to the target (root)
 //       // node's only child.
-//       // 			- Then delete the target (curr) node.
+//       // 			- Then delete the target (root) node.
 //       //
 //       // - Case 3: our target node has two children (we have to be careful
 //       when
@@ -112,73 +113,72 @@ Node *createNode(int value) {
 //       // node.
 //       //
 //     }
-//     if (value < curr->value) {
-//       parent = curr;
-//       curr = curr->left;
-//     } else if (value > curr->value) {
-//       parent = curr;
-//       curr = curr->right;
+//     if (value < root->value) {
+//       parent = root;
+//       root = curr->left;
+//     } else if (value > root->value) {
+//       parent = root;
+//       root = curr->right;
 //     }
 //   }
 // }
 //
-// bool find(Node *curr, int value) {
-//   if (curr == NULL) {
+// bool find(Node *root, int value) {
+//   if (root == NULL) {
 //     return false;
-//   } else if (value == curr->value) {
+//   } else if (value == root->value) {
 //     return true;
-//   } else if (value < curr->value) {
-//     return find(curr->left, value);
+//   } else if (value < root->value) {
+//     return find(root->left, value);
 //   } else {
-//     return find(curr->right, value);
+//     return find(root->right, value);
 //   }
 // }
 //
-// int min(Node *curr) {
-//   if (curr == NULL) {
+// int min(Node *root) {
+//   if (root == NULL) {
 //     return -1;
 //   }
 //
-//   if (curr->left == NULL) {
-//     return curr->value;
+//   if (root->left == NULL) {
+//     return root->value;
 //   }
 //
-//   return min(curr->left);
+//   return min(root->left);
 // }
 //
-// int max(Node *curr) {
-//   if (curr == NULL) {
+// int max(Node *root) {
+//   if (root == NULL) {
 //     return -1;
 //   }
 //
-//   if (curr->right == NULL) {
-//     return curr->value;
+//   if (root->right == NULL) {
+//     return root->value;
 //   }
 //
-//   return max(curr->right);
-// }
-//
-// void printTree(Node *curr) {
-//   if (curr == NULL) {
-//     return;
-//   }
-//
-//   // pre-order traversal
-//   printf("pre-order traversal: %d\n", curr->value);
-//   printTree(curr->left);
-//   printTree(curr->right);
+//   return max(root->right);
 // }
 
-void demolish(Node *curr) {
-  if (!curr) {
+void printTree(Node **root) {
+  if (!(*root)) {
     return;
   }
 
-  demolish(curr->left);
-  demolish(curr->right);
-  // post-order traversal
-  printf("post-order traversal: %d\n", curr->value);
+  // pre-order traversal
+  printf("pre-order traversal: %d\n", (*root)->value);
+  printTree(&(*root)->left);
+  printTree(&(*root)->right);
+}
 
-  free(curr);
-  curr = NULL;
+void demolish(Node **root) {
+  if (!(*root)) {
+    return;
+  }
+
+  demolish(&(*root)->left);
+  demolish(&(*root)->right);
+  // post-order traversal
+  printf("post-order traversal: %d\n", (*root)->value);
+
+  free(*root);
 }
