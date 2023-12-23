@@ -47,8 +47,6 @@ void insertAtRear(Node **list, int value) {
 }
 
 void insert(Node **list, int value) {
-  Node *new_node = createNode(value);
-
   // if our list is empty -> add to front
   if (!(*list)->next) {
     insertAtHead(list, value);
@@ -63,6 +61,7 @@ void insert(Node **list, int value) {
     insertAtRear(list, value);
   } else {
     // add somewhere in the middle
+    Node *new_node = createNode(value);
     Node *p = (*list)->next;
 
     while (p) {
@@ -82,7 +81,7 @@ void insert(Node **list, int value) {
 }
 
 void printList(Node **list) {
-  if (!(*list)->next) {
+  if (!(*list) || !(*list)->next) {
     printf("nothing to print\n");
     return;
   }
@@ -145,10 +144,11 @@ void demolish(Node **list) {
     return;
   }
 
-  Node *p = (*list)->prev;
-  while (p) {
-    p = p->prev;
-    free(p);
+  Node *curr = (*list)->next;
+  while (curr) {
+    Node *next = curr->next;
+    free(curr);
+    curr = next;
   }
 
   (*list)->next = NULL;

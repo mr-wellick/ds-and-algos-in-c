@@ -17,7 +17,7 @@ Node *createNode(int value);
  * insert our node. Recall, binary search is Log2(N).
  *
  * */
-// void insert(Node *curr, int value);
+void insert(Node **root, int value);
 
 /* Big Oh of BST Deletion
  *
@@ -34,21 +34,21 @@ Node *createNode(int value);
  *   our value? ==> N steps.
  *
  * */
-// bool find(Node *curr, int value);
+bool find(Node **curr, int value);
 
 /* Big Oh of printing BST
  *
  * - Since we need to visit each node, it's N steps.
  *
  * */
-// void printTree(Node *curr);
+void printTree(Node **root);
 
 /* Big Oh of freeing BST
  *
  * - Since we need to visit each node, it's N steps.
  *
  * */
-void demolish(Node *curr);
+void demolish(Node **root);
 
 /* Big Oh of Finding the min value.
  *
@@ -56,7 +56,7 @@ void demolish(Node *curr);
  * - This depends on whether the tree is balanced or not.
  *
  * */
-// int min(Node *curr);
+int min(Node **curr);
 
 /* Big Oh of finding the max value.
  *
@@ -64,6 +64,6 @@ void demolish(Node *curr);
  * - This depends on whether the tree is balanced or not.
  *
  * */
-// int max(Node *curr);
+int max(Node **curr);
 
 #endif
