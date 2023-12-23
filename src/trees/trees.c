@@ -122,42 +122,42 @@ void insert(Node **root, int value) {
 //     }
 //   }
 // }
-//
-// bool find(Node *root, int value) {
-//   if (root == NULL) {
-//     return false;
-//   } else if (value == root->value) {
-//     return true;
-//   } else if (value < root->value) {
-//     return find(root->left, value);
-//   } else {
-//     return find(root->right, value);
-//   }
-// }
-//
-// int min(Node *root) {
-//   if (root == NULL) {
-//     return -1;
-//   }
-//
-//   if (root->left == NULL) {
-//     return root->value;
-//   }
-//
-//   return min(root->left);
-// }
-//
-// int max(Node *root) {
-//   if (root == NULL) {
-//     return -1;
-//   }
-//
-//   if (root->right == NULL) {
-//     return root->value;
-//   }
-//
-//   return max(root->right);
-// }
+
+bool find(Node **root, int value) {
+  if (!(*root)) {
+    return false;
+  } else if (value == (*root)->value) {
+    return true;
+  } else if (value < (*root)->value) {
+    return find(&(*root)->left, value);
+  } else {
+    return find(&(*root)->right, value);
+  }
+}
+
+int min(Node **root) {
+  if (!(*root)) {
+    return -1;
+  }
+
+  if (!(*root)->left) {
+    return (*root)->value;
+  }
+
+  return min(&(*root)->left);
+}
+
+int max(Node **root) {
+  if (!(*root)) {
+    return -1;
+  }
+
+  if (!(*root)->right) {
+    return (*root)->value;
+  }
+
+  return max(&(*root)->right);
+}
 
 void printTree(Node **root) {
   if (!(*root)) {

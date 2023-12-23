@@ -21,56 +21,78 @@ void test_create_node(void) {
   TEST_ASSERT_NULL(root);
 }
 
-void test_insertion() {
+void test_tree_insertion() {
   Node *root = NULL;
 
-  insert(&root, 5);
-  insert(&root, 1);
-  insert(&root, 20);
-  insert(&root, 15);
-  insert(&root, -4);
+  insert(&root, 3);
+  insert(&root, -2);
+  insert(&root, 6);
+  insert(&root, 2);
+  insert(&root, 25);
 
+  // since our printTree method employs pre-order traversal, expected output
+  // should be: 2, -2, 25, 6, 3
   printTree(&root);
+  printf("\n");
 
-  TEST_ASSERT_EQUAL_INT(5, root->value);
-  TEST_ASSERT_NOT_NULL(root->left);
-  TEST_ASSERT_NOT_NULL(root->right);
-
-  TEST_ASSERT_EQUAL_INT(1, root->left->value);
-  TEST_ASSERT_NOT_NULL(root->left->left);
-  TEST_ASSERT_NULL(root->left->right);
-
-  TEST_ASSERT_EQUAL_INT(20, root->right->value);
-  TEST_ASSERT_NOT_NULL(root->right->left);
-  TEST_ASSERT_NULL(root->right->right);
-
+  // since our demolish method employs post-order traversal, expected output
+  // should be: 2, -2, 25, 6, 3
   demolish(&root);
 
   root = NULL;
   TEST_ASSERT_NULL(root);
 }
 
-// void print_tree() {
-//   Node *root = createNode(2);
-//
-//   insert(&root, 3);
-//   insert(&root, -2);
-//   insert(&root, 6);
-//   //insert(&root, 2);
-//   insert(&root, 25);
-//
-//   printTree(&root);
-//   //demolish(&root);
-//
-//   //root = NULL;
-//   //TEST_ASSERT_NULL(root);
-// }
+void test_find_value() {
+  Node *root = NULL;
 
+  insert(&root, 3);
+  insert(&root, -2);
+  insert(&root, 6);
+  insert(&root, 2);
+  insert(&root, 25);
+
+  // Was value found?
+  // True: 1
+  // False: 0
+  TEST_ASSERT_EQUAL_INT(1, find(&root, 25));
+  TEST_ASSERT_EQUAL_INT(0, find(&root, 100));
+}
+
+void test_find_min() {
+  Node *root = NULL;
+
+  TEST_ASSERT_EQUAL_INT(-1, min(&root));
+
+  insert(&root, 3);
+  insert(&root, -2);
+  insert(&root, 6);
+  insert(&root, 2);
+  insert(&root, 25);
+
+  TEST_ASSERT_EQUAL_INT(-2, min(&root));
+}
+
+void test_find_max() {
+  Node *root = NULL;
+
+  TEST_ASSERT_EQUAL_INT(-1, max(&root));
+
+  insert(&root, 3);
+  insert(&root, -2);
+  insert(&root, 6);
+  insert(&root, 2);
+  insert(&root, 25);
+
+  TEST_ASSERT_EQUAL_INT(25, max(&root));
+}
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_node);
-  RUN_TEST(test_insertion);
-  // RUN_TEST(print_tree);
+  RUN_TEST(test_tree_insertion);
+  RUN_TEST(test_find_value);
+  RUN_TEST(test_find_min);
+  RUN_TEST(test_find_max);
   UNITY_END();
 
   return 0;
