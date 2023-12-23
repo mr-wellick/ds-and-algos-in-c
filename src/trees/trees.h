@@ -24,7 +24,7 @@ void insert(Node **root, int value);
  * - Not so simple
  *
  * */
-// void erase(Node *curr, int value);
+void erase(Node **curr, int value);
 
 /* Big Oh of BST Search
  *

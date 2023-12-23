@@ -86,6 +86,15 @@ void test_find_max() {
 
   TEST_ASSERT_EQUAL_INT(25, max(&root));
 }
+
+void test_erase() {
+  Node *root = NULL;
+
+  insert(&root, 3);
+  erase(&root, 3);
+
+};
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_node);
@@ -93,6 +102,7 @@ int main(void) {
   RUN_TEST(test_find_value);
   RUN_TEST(test_find_min);
   RUN_TEST(test_find_max);
+  RUN_TEST(test_erase);
   UNITY_END();
 
   return 0;
