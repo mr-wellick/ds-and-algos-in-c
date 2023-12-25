@@ -50,27 +50,18 @@ void insert(Node **root, int value) {
   }
 }
 
-Node *findHelper(Node **root, int value) {
-  if (!(*root)) {
-    return NULL;
-  } else if (value == (*root)->value) {
-    return *root;
-  } else if (value < (*root)->value) {
-    return findHelper(&(*root)->left, value);
-  } else {
-    return findHelper(&(*root)->right, value);
-  }
-}
-
 void erase(Node **root, int value) {
+  if (!(*root)) {
+    return;
+  }
+
   // 1. find V in tree
   //     - use two pointers: root and a parent pointer
   // 2. if node found, delete from tree making sure to preserve the ordering
   // 	- 3 cases
   Node *parent = NULL;
   Node *curr = *root;
-  while (*root) {
-
+  while (curr) {
     // Case 1: our target node is a leaf node
     if (!curr->left && !curr->right) {
       if (curr->value == value) {
@@ -80,44 +71,33 @@ void erase(Node **root, int value) {
         } else {
           // Not the root node:
         }
-        // free(curr)
         return;
       }
+    } else if (curr->left || curr->right) { // Case 2: Target node has one child
+      // The root node
+      if (!parent) {
+      } else {
+        // Not the root node
+      }
+    } else if (curr->left &&
+               curr->right) { // Case 3: Target node has two children
+      // Replace its value with one from another node
+      //   - 1. K's left subtree's largest-valued child
+      //   - 2. K's right subtree's smallest-valued child
+      //
+      // These two replacements are the only suitable replacements for our
+      // target node. Note, that both of them are either a leaf or have just one
+      // child! So we pick one, copy its value up, then delete that node.
     }
 
     // note: need to advance pointer to reach above case
     parent = curr;
-    curr = findHelper(&curr, value);
-    // - Case 2: our target node has one child (it has two sub-cases)
-    // 		- Sub case #1: The target node is NOT the root node
-    // 			- Relink the parent node to the target (root)
-    // node's only child.
-    // 			- Then delete the target (root) node.
-    // 		- Sub Case #2: The target node is the root node
-    // 			- Relink the root pointer to the target (root)
-    // node's only child.
-    // 			- Then delete the target (root) node.
-    //
-    // - Case 3: our target node has two children (we have to be careful when
-    // deleting a node with two children)
-    // 		- note: we don't actually delete the node itself.
-    // Instead, we replace its value with one from another node!
-    // 		-       we want to replace the target node with either:
-    // 		- 1. K's left subtree's largest-valued child
-    // 		- 2. K's right subtree's smallest-valued child
-    //
-    //		- These two replacements are the only suitable
-    // replacements for our target node. Note, that both of them are either a
-    // leaf or have just one child!
-    // 		- So we pick one, copy its value up, then delete that node.
-    //}
-    // if (value < root->value) {
-    //  parent = root;
-    //  root = curr->left;
-    //} else if (value > root->value) {
-    //  parent = root;
-    //  root = curr->right;
-    //}
+    if (value < curr->value) {
+      curr = curr->left;
+    }
+    if (value > curr->value) {
+      curr = curr->right;
+    }
   }
 }
 
