@@ -52,11 +52,13 @@ void test_find_value() {
   insert(&root, 2);
   insert(&root, 25);
 
-  // Was value found?
-  // True: 1
-  // False: 0
-  TEST_ASSERT_EQUAL_INT(1, find(&root, 25));
-  TEST_ASSERT_EQUAL_INT(0, find(&root, 100));
+  TEST_ASSERT_EQUAL_INT(25, find(&root, 25));
+  TEST_ASSERT_EQUAL_INT(-1, find(&root, 100));
+
+  demolish(&root);
+  root = NULL;
+
+  TEST_ASSERT_NULL(root);
 }
 
 void test_find_min() {
@@ -71,6 +73,11 @@ void test_find_min() {
   insert(&root, 25);
 
   TEST_ASSERT_EQUAL_INT(-2, min(&root));
+
+  demolish(&root);
+  root = NULL;
+
+  TEST_ASSERT_NULL(root);
 }
 
 void test_find_max() {
@@ -85,15 +92,37 @@ void test_find_max() {
   insert(&root, 25);
 
   TEST_ASSERT_EQUAL_INT(25, max(&root));
+
+  demolish(&root);
+  root = NULL;
+
+  TEST_ASSERT_NULL(root);
 }
 
-void test_erase() {
+void test_erase_leaf_node_is_root_node() {
   Node *root = NULL;
 
+  insert(&root, 5);
+  erase(&root, 5);
+  printTree(&root);
+
+  TEST_ASSERT_NULL(root);
+}
+
+void test_erase_leaf_node_is_not_root_node() {
+  Node *root = NULL;
+
+  insert(&root, 5);
   insert(&root, 3);
   erase(&root, 3);
 
-};
+  TEST_ASSERT_NOT_NULL(root);
+
+  demolish(&root);
+  root = NULL;
+
+  TEST_ASSERT_NULL(root);
+}
 
 int main(void) {
   UNITY_BEGIN();
@@ -102,7 +131,8 @@ int main(void) {
   RUN_TEST(test_find_value);
   RUN_TEST(test_find_min);
   RUN_TEST(test_find_max);
-  RUN_TEST(test_erase);
+  RUN_TEST(test_erase_leaf_node_is_root_node);
+  RUN_TEST(test_erase_leaf_node_is_not_root_node);
   UNITY_END();
 
   return 0;

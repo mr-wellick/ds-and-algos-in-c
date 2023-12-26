@@ -55,57 +55,95 @@ void erase(Node **root, int value) {
     return;
   }
 
-  // 1. find V in tree
-  //     - use two pointers: root and a parent pointer
-  // 2. if node found, delete from tree making sure to preserve the ordering
-  // 	- 3 cases
+  // 1. find value in tree.
+  // - Use two pointers: root and a parent pointer
   Node *parent = NULL;
   Node *curr = *root;
+
   while (curr) {
-    // Case 1: our target node is a leaf node
-    if (!curr->left && !curr->right) {
-      if (curr->value == value) {
-        printf("found the value: %d", curr->value);
-        // The root node
-        if (!parent) {
+    if (value == curr->value) {
+      // Case 1: our target node is a leaf node
+      if (!curr->left && !curr->right) {
+        /* Subcase 1: our target node is NOT the root node
+         *
+         *  - Unlink parent node from the target node by setting the parent's
+         * appropriate link to NULL.
+         *  - Delete the target node.
+         */
+        if (parent) {
+          if (curr == parent->left) {
+            parent->left = NULL;
+          } else if (curr == parent->right) {
+            parent->right = NULL;
+          }
         } else {
-          // Not the root node:
+          /* Subcase 2: our target node is the root node
+           *
+           * - Set the root pointer to NULL
+           * - Then delete the target node
+           */
+          *root = NULL;
         }
+        free(curr);
         return;
       }
-    } else if (curr->left || curr->right) { // Case 2: Target node has one child
-      // The root node
-      if (!parent) {
-      } else {
-        // Not the root node
+      // Case 2: Target node has one child
+      else if (curr->left || curr->right) {
+        // Subcase 1: our target node is NOT the root node
+        if (parent) {
+          if (curr == parent->left) {
+            if (curr->left) {
+              parent->left = curr->left;
+            } else if (curr->right) {
+              parent->left = curr->right;
+            }
+          } else if (curr == parent->right) {
+            if (curr->right) {
+              parent->right = curr->right;
+            } else if (curr->left) {
+              parent->right = curr->left;
+            }
+          }
+        }
+        // Subcase 2: our target node is the root node
+        else {
+          if (curr->left) {
+            (*root) = curr->left;
+          } else if (curr->right) {
+            (*root) = curr->right;
+          }
+        }
+        free(curr);
+        return;
+      } else if (curr->left && curr->right) {
+        // Case 3: Target node has two children
+        // Replace its value with one from another node
+        //   - 1. K's left subtree's largest-valued child
+        //   - 2. K's right subtree's smallest-valued child
+        //
+        // These two replacements are the only suitable replacements for our
+        // target node. Note, that both of them are either a leaf or have just
+        // one child! So we pick one, copy its value up, then delete that
+        // node.
+        return;
       }
-    } else if (curr->left &&
-               curr->right) { // Case 3: Target node has two children
-      // Replace its value with one from another node
-      //   - 1. K's left subtree's largest-valued child
-      //   - 2. K's right subtree's smallest-valued child
-      //
-      // These two replacements are the only suitable replacements for our
-      // target node. Note, that both of them are either a leaf or have just one
-      // child! So we pick one, copy its value up, then delete that node.
     }
 
     // note: need to advance pointer to reach above case
     parent = curr;
     if (value < curr->value) {
       curr = curr->left;
-    }
-    if (value > curr->value) {
+    } else if (value > curr->value) {
       curr = curr->right;
     }
   }
 }
 
-bool find(Node **root, int value) {
+int find(Node **root, int value) {
   if (!(*root)) {
-    return false;
+    return -1;
   } else if (value == (*root)->value) {
-    return true;
+    return (*root)->value;
   } else if (value < (*root)->value) {
     return find(&(*root)->left, value);
   } else {
