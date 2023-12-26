@@ -56,7 +56,7 @@ void demolish(Node **root);
  * - This depends on whether the tree is balanced or not.
  *
  * */
-int min(Node **curr);
+int min(Node *curr);
 
 /* Big Oh of finding the max value.
  *
@@ -64,6 +64,6 @@ int min(Node **curr);
  * - This depends on whether the tree is balanced or not.
  *
  * */
-int max(Node **curr);
+int max(Node *curr);
 
 #endif
