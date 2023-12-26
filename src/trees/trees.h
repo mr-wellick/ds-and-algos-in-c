@@ -24,7 +24,7 @@ void insert(Node **root, int value);
  * - Not so simple
  *
  * */
-// void erase(Node *curr, int value);
+void erase(Node **curr, int value);
 
 /* Big Oh of BST Search
  *
@@ -34,7 +34,7 @@ void insert(Node **root, int value);
  *   our value? ==> N steps.
  *
  * */
-bool find(Node **curr, int value);
+int find(Node **curr, int value);
 
 /* Big Oh of printing BST
  *
@@ -56,7 +56,7 @@ void demolish(Node **root);
  * - This depends on whether the tree is balanced or not.
  *
  * */
-int min(Node **curr);
+int min(Node *curr);
 
 /* Big Oh of finding the max value.
  *
@@ -64,6 +64,6 @@ int min(Node **curr);
  * - This depends on whether the tree is balanced or not.
  *
  * */
-int max(Node **curr);
+int max(Node *curr);
 
 #endif
