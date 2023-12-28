@@ -61,7 +61,6 @@ void insert(Node **list, int value) {
     insertAtRear(list, value);
   } else {
     // add somewhere in the middle
-    Node *new_node = createNode(value);
     Node *p = (*list)->next;
 
     while (p) {
@@ -72,6 +71,8 @@ void insert(Node **list, int value) {
       }
       p = p->next;
     }
+
+    Node *new_node = createNode(value);
 
     new_node->next = p;
     new_node->prev = p->prev;
