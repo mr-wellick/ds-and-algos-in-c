@@ -92,3 +92,7 @@ for(i = 0; i < SIZE; i++)
 ```c
 int m[6][22];
 ```
+
+- C stores arrays in row-major order, with row 0 first, then row 1, and so forth. For example, here's how the marray is stored:
+
+<img src="img/row-major-order.jpeg" />
