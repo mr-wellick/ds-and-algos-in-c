@@ -55,3 +55,40 @@ int a[15] = { [14] = 48, [2] = 29, [9] = 7 };
 // If the length of the array is omitted, the compiler will deduce the length from the largest designator
 int b[] = { [5] = 10, [23] = 13, [11] = 36, [15] = 29 };
 ```
+
+# Sizeof operator
+
+- The sizeof operator can be used to determine the size of the array (in bytes).
+
+```c
+int a[10] = { 0 }
+
+// gives us the length of the array
+sizeof(a) / sizeof(a[0])
+
+/* 
+    note: sizeof produces a value of size_t (an unsigned type), as such, some compilers produce a warning message for the expression: sizeof(a) / sizeof(a[0])
+    - i is most likely a type int (signed type)
+    - Comparing a signed integer with an unsigned integer is a dangerous practice,
+*/ 
+for(i = 0; i < sizeof(a) / sizeof(a[0]); i++)
+    a[i] = 0;
+
+// We can cast
+for(i = 0; i < (int) ( sizeof(a) / sizeof(a[0]) ); i++)
+    a[i] = 0;
+
+// We can write a macro to avoid writing that nice expression (more about this in chapter 14.3 parameterized macros)
+#define SIZE ( (int) (sizeof (a) / sizeof a([0])) )
+
+for(i = 0; i < SIZE; i++)
+    a[i] = 0;
+```
+
+# Multidimensional Arrays
+
+- An array may have any number of dimensions.
+
+```c
+int m[6][22];
+```
