@@ -44,7 +44,7 @@ int a[10] = { 0 };
 
 ```c
 // We want to initialize only some elements
-int a[15] = {0, 0, 29, ,0 0, ,0 0, 0, 0, 7 , 0, ,0 ,0 0, 48};
+int a[15] = {0, 0, 29, 0, 0, 0, 7, 0, 0, 0, 48};
 
 // Instead (each number in brackets is said to be a designator).
 int a[15] = { [2] = 29, [9] = 7, [14] = 48 };
@@ -56,7 +56,7 @@ int a[15] = { [14] = 48, [2] = 29, [9] = 7 };
 int b[] = { [5] = 10, [23] = 13, [11] = 36, [15] = 29 };
 ```
 
-# Sizeof operator
+# Sizeof Operator
 
 - The sizeof operator can be used to determine the size of the array (in bytes).
 
@@ -104,7 +104,7 @@ int m[1][2] = {
 
 - Note: Multidimensional arrays play a lesser role in C than in many other programming languages, primarily because C provides a more flexible way to store multidimensional data: arrays of pointers (chapter 13.7).
 
-# Variable length arrays
+# Variable Length Arrays
 
 - We can determine the length of the array when the program is executed
 
