@@ -18,7 +18,7 @@ int a[4];
 int a[N];
 ```
 
-- In general, if an array contains elements of type T, then each element of the array is treated as if it were a variable of type T. 
+- In general, if an array contains elements of type T, then each element of the array is treated as if it were a variable of type T.
 
 ```c
 // For example, the elements below behave like int variables.
@@ -66,11 +66,11 @@ int a[10] = { 0 }
 // gives us the length of the array
 sizeof(a) / sizeof(a[0])
 
-/* 
+/*
     note: sizeof produces a value of size_t (an unsigned type), as such, some compilers produce a warning message for the expression: sizeof(a) / sizeof(a[0])
     - i is most likely a type int (signed type)
     - Comparing a signed integer with an unsigned integer is a dangerous practice,
-*/ 
+*/
 for(i = 0; i < sizeof(a) / sizeof(a[0]); i++)
     a[i] = 0;
 
@@ -89,10 +89,35 @@ for(i = 0; i < SIZE; i++)
 
 - An array may have any number of dimensions.
 
+- We can also use designated initializers in multidimensional arrays.
+
 ```c
-int m[6][22];
+// row x columns
+int m[1][2] = {
+            { 5, 20, 5 },
+        }; // the rest of the rows will be initialized to 0
 ```
 
 - C stores arrays in row-major order, with row 0 first, then row 1, and so forth. For example, here's how the marray is stored:
 
 <img src="img/row-major-order.jpeg" />
+
+- Note: Multidimensional arrays play a lesser role in C than in many other programming languages, primarily because C provides a more flexible way to store multidimensional data: arrays of pointers (chapter 13.7).
+
+# Variable length arrays
+
+- We can determine the length of the array when the program is executed
+
+```c
+int n;
+
+printf("How many numbers do you want to reverse? ");
+scanf("%d", &n);
+
+// C99 only - length of array depends on n
+int a[n];
+```
+
+- Can't have static storage duration (need to read about this later)
+
+- Can't have an initializer
