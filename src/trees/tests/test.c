@@ -64,7 +64,7 @@ void test_find_value() {
 void test_find_min() {
   Node *root = NULL;
 
-  TEST_ASSERT_EQUAL_INT(-1, min(root));
+  TEST_ASSERT_NULL(min(root));
 
   insert(&root, 3);
   insert(&root, -2);
@@ -72,7 +72,7 @@ void test_find_min() {
   insert(&root, 2);
   insert(&root, 25);
 
-  TEST_ASSERT_EQUAL_INT(-2, min(root));
+  TEST_ASSERT_EQUAL_INT(-2, min(root)->value);
 
   demolish(&root);
   root = NULL;
@@ -83,7 +83,7 @@ void test_find_min() {
 void test_find_max() {
   Node *root = NULL;
 
-  TEST_ASSERT_EQUAL_INT(-1, max(root));
+  TEST_ASSERT_NULL(max(root));
 
   insert(&root, 3);
   insert(&root, -2);
@@ -91,7 +91,7 @@ void test_find_max() {
   insert(&root, 2);
   insert(&root, 25);
 
-  TEST_ASSERT_EQUAL_INT(25, max(root));
+  TEST_ASSERT_EQUAL_INT(25, max(root)->value);
 
   demolish(&root);
   root = NULL;
@@ -175,7 +175,7 @@ void test_erase_node_w_two_child() {
   TEST_ASSERT_EQUAL_INT(7, root->right->value);
   TEST_ASSERT_NULL(root->left);
 
-  // post-order: 2, 7
+  // post-order: 7, 2
   demolish(&root);
   root = NULL;
 
@@ -187,12 +187,19 @@ void test_erase_node_w_two_child() {
 
   erase(&root, 3);
   TEST_ASSERT_EQUAL_INT(5, root->value);
-  TEST_ASSERT_EQUAL_INT(4, root->left->value);
-  TEST_ASSERT_EQUAL_INT(-1, root->left->left->value);
+  TEST_ASSERT_EQUAL_INT(-1, root->left->value);
+  TEST_ASSERT_EQUAL_INT(4, root->left->right->value);
+  TEST_ASSERT_NULL(root->left->left);
   TEST_ASSERT_NULL(root->right);
 
-  // pre-order: 5, 4, -1
+  // pre-order: 5, -1, 4
   printTree(&root);
+
+  // post-order: 4, -1, 5
+  demolish(&root);
+
+  root = NULL;
+  TEST_ASSERT_NULL(root);
 }
 
 int main(void) {

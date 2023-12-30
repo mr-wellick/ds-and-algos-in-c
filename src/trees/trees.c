@@ -74,16 +74,17 @@ void erase(Node **root, int value) {
     // Replace its value with one from another node
     //   - 1. K's left subtree's largest-valued child  OR
     //   - 2. K's right subtree's smallest-valued child
-    int replacement = max(curr->left);
+    Node *replacement = max(curr->left);
 
-    if (replacement == -1) {
+    if (!replacement) {
       printf("can't find a suitable replacement for value to erase: %d\n",
              value);
       return;
     }
 
-    erase(&curr, replacement);
-    curr->value = replacement;
+    int copyOfValue = replacement->value;
+    erase(&curr, replacement->value);
+    curr->value = copyOfValue;
 
     return;
   }
@@ -136,25 +137,25 @@ int find(Node **root, int value) {
   }
 }
 
-int min(Node *root) {
+Node *min(Node *root) {
   if (!root) {
-    return -1;
+    return root;
   }
 
   if (!root->left) {
-    return root->value;
+    return root;
   }
 
   return min(root->left);
 }
 
-int max(Node *root) {
+Node *max(Node *root) {
   if (!root) {
-    return -1;
+    return root;
   }
 
   if (!root->right) {
-    return root->value;
+    return root;
   }
 
   return max(root->right);
