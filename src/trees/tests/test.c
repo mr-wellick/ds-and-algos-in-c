@@ -171,9 +171,9 @@ void test_erase_node_w_two_child() {
   insert(&root, 7);
 
   erase(&root, 5);
-  TEST_ASSERT_EQUAL_INT(7, root->value);
-  TEST_ASSERT_EQUAL_INT(2, root->left->value);
-  TEST_ASSERT_NULL(root->right);
+  TEST_ASSERT_EQUAL_INT(2, root->value);
+  TEST_ASSERT_EQUAL_INT(7, root->right->value);
+  TEST_ASSERT_NULL(root->left);
 
   // post-order: 2, 7
   demolish(&root);

@@ -74,9 +74,17 @@ void erase(Node **root, int value) {
     // Replace its value with one from another node
     //   - 1. K's left subtree's largest-valued child  OR
     //   - 2. K's right subtree's smallest-valued child
-    int replacement = max(curr);
+    int replacement = max(curr->left);
+
+    if (replacement == -1) {
+      printf("can't find a suitable replacement for value to erase: %d\n",
+             value);
+      return;
+    }
+
     erase(&curr, replacement);
     curr->value = replacement;
+
     return;
   }
   // Case 2: our target node is a leaf node
