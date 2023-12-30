@@ -125,15 +125,15 @@ void erase(Node **root, int value) {
   }
 }
 
-int find(Node **root, int value) {
-  if (!(*root)) {
-    return -1;
-  } else if (value == (*root)->value) {
-    return (*root)->value;
-  } else if (value < (*root)->value) {
-    return find(&(*root)->left, value);
+Node *find(Node *root, int value) {
+  if (!root) {
+    return root;
+  } else if (value == root->value) {
+    return root;
+  } else if (value < root->value) {
+    return find(root->left, value);
   } else {
-    return find(&(*root)->right, value);
+    return find(root->right, value);
   }
 }
 

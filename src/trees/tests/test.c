@@ -52,8 +52,8 @@ void test_find_value() {
   insert(&root, 2);
   insert(&root, 25);
 
-  TEST_ASSERT_EQUAL_INT(25, find(&root, 25));
-  TEST_ASSERT_EQUAL_INT(-1, find(&root, 100));
+  TEST_ASSERT_EQUAL_INT(25, find(root, 25)->value);
+  TEST_ASSERT_NULL(find(root, 100));
 
   demolish(&root);
   root = NULL;

@@ -34,7 +34,7 @@ void erase(Node **curr, int value);
  *   our value? ==> N steps.
  *
  * */
-int find(Node **curr, int value);
+Node *find(Node *curr, int value);
 
 /* Big Oh of printing BST
  *
