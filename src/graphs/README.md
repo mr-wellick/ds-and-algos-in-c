@@ -79,7 +79,7 @@ for(i = 0; i < (int) ( sizeof(a) / sizeof(a[0]) ); i++)
     a[i] = 0;
 
 // We can write a macro to avoid writing that nice expression (more about this in chapter 14.3 parameterized macros)
-#define SIZE ( (int) (sizeof (a) / sizeof a([0])) )
+#define SIZE ( (int) (sizeof (a) / sizeof(a[0])) )
 
 for(i = 0; i < SIZE; i++)
     a[i] = 0;
