@@ -15,6 +15,6 @@ void destroyGraph(Node *adjList[], int length);
  * A depth-first traversal keeps moving forward until it hits a dead end or a
  * previously-visited vertex. Then it backtracks and tries another path.
  **/
-void depthFirstTraversal(Node *adjList[]);
+void depthFirstTraversal(Node *adjList[], int currVertex);
 
 #endif

@@ -58,11 +58,19 @@ void test_depth_first_traversal(void) {
   addEdge(adjList, 5, 2);
   addEdge(adjList, 5, 6);
   addEdge(adjList, 6, 3);
+
+  depthFirstTraversal(adjList, 0);
+  destroyGraph(adjList, STRINGS);
+
+  for (int i = 0; i < STRINGS; i++) {
+    TEST_ASSERT_NULL(adjList[i]);
+  }
 }
 
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_graph);
+  RUN_TEST(test_depth_first_traversal);
   UNITY_END();
 
   return 0;
