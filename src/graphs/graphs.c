@@ -28,9 +28,14 @@ void printGraph(Node *adjList[], int length) {
 void destroyGraph(Node *adjList[], int length) {
   for (int i = 0; i < length; i++) {
     if (adjList[i]) {
-      demolish(&adjList[i]); // free doubly-linked list with help of dummy node: adjList[i]
+      demolish(&adjList[i]); // free doubly-linked list with help of dummy node:
+                             // adjList[i]
       free(adjList[i]);      // free dummy node for doubly-linked list
       adjList[i] = NULL;
     }
   }
+}
+
+void depthFirstTraversal(Node *adjList[]) {
+
 }

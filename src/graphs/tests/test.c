@@ -40,7 +40,7 @@ void test_create_graph(void) {
   }
 }
 
-void test_depth_first_search(void) {
+void test_depth_first_traversal(void) {
   Node *adjList[STRINGS] = {NULL};
 
   //     >(1)<--->(4) ---->(5)
