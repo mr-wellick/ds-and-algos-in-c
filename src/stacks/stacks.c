@@ -2,21 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node *createNode(int vertex) {
-  Node *newNode = malloc(sizeof(Node));
+StackItem *createStackItem(int vertex) {
+  StackItem *newStackItem = malloc(sizeof(StackItem));
 
-  if (!newNode) {
-    printf("Error allocating new node in createNode()");
+  if (!newStackItem) {
+    printf("Error allocating new node in createStackItem()");
     exit(EXIT_FAILURE);
   }
 
-  newNode->vertex = vertex;
-  newNode->count = 0;
-  newNode->next = NULL;
-  return newNode;
+  newStackItem->vertex = vertex;
+  newStackItem->count = 0;
+  newStackItem->next = NULL;
+  return newStackItem;
 }
 
-void push(Node **stack, int vertex) {
+void push(StackItem **stack, int vertex) {
   if (!(*stack)) {
     printf("please provide a dummy node");
     exit(EXIT_FAILURE);
@@ -24,22 +24,22 @@ void push(Node **stack, int vertex) {
   }
 
   if (!(*stack)->next) {
-    (*stack)->next = createNode(vertex);
+    (*stack)->next = createStackItem(vertex);
   } else {
-    Node *newNode = createNode(vertex);
-    newNode->next = (*stack)->next;
-    (*stack)->next = newNode;
+    StackItem *newStackItem = createStackItem(vertex);
+    newStackItem->next = (*stack)->next;
+    (*stack)->next = newStackItem;
   }
 
   (*stack)->count += 1;
 }
 
-Node *pop(Node **stack) {
+StackItem *pop(StackItem **stack) {
   if (!(*stack) || !(*stack)->next) {
     return NULL;
   }
 
-  Node *top = (*stack)->next;
+  StackItem *top = (*stack)->next;
   (*stack)->next = top->next;
 
   (*stack)->count -= 1;

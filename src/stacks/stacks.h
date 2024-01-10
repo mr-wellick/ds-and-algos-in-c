@@ -1,16 +1,16 @@
 #ifndef STACKS_H
 #define STACKS_H
 
-typedef struct Node {
+typedef struct StackItem {
   int vertex;
   int count;
-  struct Node *next;
-} Node;
+  struct StackItem *next;
+} StackItem;
 
-Node *createNode(int vertex);
+StackItem *createStackItem(int vertex);
 
-void push(Node **stack, int vertex);
+void push(StackItem **stack, int vertex);
 
-Node *pop(Node **stack);
+StackItem *pop(StackItem **stack);
 
 #endif

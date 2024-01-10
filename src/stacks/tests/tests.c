@@ -7,23 +7,23 @@ void setUp(void) {}
 void tearDown(void) {}
 
 void test_insert_to_empty_stack(void) {
-  Node *dummyNode = createNode(0);
-  TEST_ASSERT_NOT_NULL(dummyNode);
+  StackItem *dummyStack = createStackItem(0);
+  TEST_ASSERT_NOT_NULL(dummyStack);
 
-  push(&dummyNode, 10);
-  TEST_ASSERT_EQUAL_INT(10, dummyNode->next->vertex);
+  push(&dummyStack, 10);
+  TEST_ASSERT_EQUAL_INT(10, dummyStack->next->vertex);
 }
 
 void test_insert_multiple_values(void) {
-  Node *dummyNode = createNode(0);
+  StackItem *dummyStack = createStackItem(0);
 
-  push(&dummyNode, 8);
-  push(&dummyNode, 10);
-  push(&dummyNode, 12);
-  push(&dummyNode, 13);
-  push(&dummyNode, 15);
+  push(&dummyStack, 8);
+  push(&dummyStack, 10);
+  push(&dummyStack, 12);
+  push(&dummyStack, 13);
+  push(&dummyStack, 15);
 
-  Node *curr = dummyNode->next;
+  StackItem *curr = dummyStack->next;
   while (curr) {
     printf("The value of current vertex is: %d. \n", curr->vertex);
     curr = curr->next;
@@ -31,22 +31,22 @@ void test_insert_multiple_values(void) {
 }
 
 void test_pop(void) {
-  Node *dummyNode = createNode(0);
+  StackItem *dummyStack = createStackItem(0);
 
-  push(&dummyNode, 8);
-  push(&dummyNode, 10);
+  push(&dummyStack, 8);
+  push(&dummyStack, 10);
 
-  Node *topValue = pop(&dummyNode);
+  StackItem *topValue = pop(&dummyStack);
   TEST_ASSERT_EQUAL_INT(10, topValue->vertex);
   free(topValue);
   topValue = NULL;
 
-  topValue = pop(&dummyNode);
+  topValue = pop(&dummyStack);
   TEST_ASSERT_EQUAL_INT(8, topValue->vertex);
   free(topValue);
   topValue = NULL;
 
-  topValue = pop(&dummyNode);
+  topValue = pop(&dummyStack);
   TEST_ASSERT_NULL(topValue);
 }
 

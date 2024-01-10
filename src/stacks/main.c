@@ -1,30 +1,29 @@
 #include "stacks.h"
 #include <stdio.h>
 #include <stdlib.h>
-// #include <stdlib.h>
 
 int main(void) {
-  Node *dummyNode = createNode(0);
+  StackItem *dummyStack = createStackItem(0);
 
-  push(&dummyNode, 8);
-  push(&dummyNode, 10);
-  push(&dummyNode, 12);
-  push(&dummyNode, 13);
-  push(&dummyNode, 15);
+  push(&dummyStack, 8);
+  push(&dummyStack, 10);
+  push(&dummyStack, 12);
+  push(&dummyStack, 13);
+  push(&dummyStack, 15);
 
   // 5
-  printf("We start with %d items\n\n", dummyNode->count);
+  printf("We start with %d items\n\n", dummyStack->count);
 
-  while (dummyNode->count > 0) {
-    Node *top = pop(&dummyNode);
+  while (dummyStack->count > 0) {
+    StackItem *top = pop(&dummyStack);
     printf("The value of top is: %d and the new count is %d\n", top->vertex,
-           dummyNode->count);
+           dummyStack->count);
     free(top);
     top = NULL;
   }
 
-  free(dummyNode);
-  dummyNode = NULL;
+  free(dummyStack);
+  dummyStack = NULL;
 
   return 0;
 }
