@@ -1,6 +1,6 @@
 # Stacks
 
-- A stack is an Abstract Data Type that holds a collection of items (lint ints) where the elements are always added to one end.
+- A stack is an Abstract Data Type that holds a collection of items (like ints) where the elements are always added to one end.
 
 - Just like a stack of plates, the last item pushed onto the top of a stack is the first item to be removed.
 
