@@ -1,16 +1,20 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-typedef struct Edge {
-  int to;
-} Edge;
+#include "../linked-lists/linked-lists.h"
 
-Edge *createEdge(int to);
+void addEdge(Node *adjList[], int from, int to);
+
+// modularize length later
+void printGraph(Node *adjList[], int length);
+
+// modularize length later
+void destroyGraph(Node *adjList[], int length);
 
 /*
  * A depth-first traversal keeps moving forward until it hits a dead end or a
  * previously-visited vertex. Then it backtracks and tries another path.
  **/
-void depthFirstTraversal(int curVertex);
+void depthFirstTraversal(void);
 
 #endif
