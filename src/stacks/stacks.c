@@ -11,6 +11,7 @@ Node *createNode(int vertex) {
   }
 
   newNode->vertex = vertex;
+  newNode->count = 0;
   newNode->next = NULL;
   return newNode;
 }
@@ -30,7 +31,7 @@ void push(Node **stack, int vertex) {
     (*stack)->next = newNode;
   }
 
-  return;
+  (*stack)->count += 1;
 }
 
 Node *pop(Node **stack) {
@@ -40,6 +41,8 @@ Node *pop(Node **stack) {
 
   Node *top = (*stack)->next;
   (*stack)->next = top->next;
+
+  (*stack)->count -= 1;
 
   return top;
 }

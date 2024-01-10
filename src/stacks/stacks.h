@@ -3,6 +3,7 @@
 
 typedef struct Node {
   int vertex;
+  int count;
   struct Node *next;
 } Node;
 
