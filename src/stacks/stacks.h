@@ -8,6 +8,8 @@ typedef struct Node {
 
 Node *createNode(int vertex);
 
-void insert(Node **stack, int vertex);
+void push(Node **stack, int vertex);
+
+Node *pop(Node **stack);
 
 #endif

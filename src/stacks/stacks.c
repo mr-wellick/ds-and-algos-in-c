@@ -15,13 +15,31 @@ Node *createNode(int vertex) {
   return newNode;
 }
 
-void insert(Node **stack, int vertex) {
+void push(Node **stack, int vertex) {
+  if (!(*stack)) {
+    printf("please provide a dummy node");
+    exit(EXIT_FAILURE);
+    return;
+  }
+
   if (!(*stack)->next) {
     (*stack)->next = createNode(vertex);
-    return;
   } else {
     Node *newNode = createNode(vertex);
     newNode->next = (*stack)->next;
     (*stack)->next = newNode;
   }
+
+  return;
+}
+
+Node *pop(Node **stack) {
+  if (!(*stack) || !(*stack)->next) {
+    return NULL;
+  }
+
+  Node *top = (*stack)->next;
+  (*stack)->next = top->next;
+
+  return top;
 }
