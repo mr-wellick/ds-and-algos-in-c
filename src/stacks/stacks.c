@@ -16,8 +16,12 @@ Node *createNode(int vertex) {
 }
 
 void insert(Node **stack, int vertex) {
-  if (!(*stack)) {
-    *stack = createNode(vertex);
+  if (!(*stack)->next) {
+    (*stack)->next = createNode(vertex);
     return;
+  } else {
+    Node *newNode = createNode(vertex);
+    newNode->next = (*stack)->next;
+    (*stack)->next = newNode;
   }
 }
