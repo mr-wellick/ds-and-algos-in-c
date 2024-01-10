@@ -24,11 +24,9 @@ void test_create_edge(void) {
 }
 
 void test_create_graph(void) {
-  Edge E2_adjacencyList[SEMITONES] = {};
-
-  for (int i = 0; i < SIZE; i++) {
-    printf("test %d", E2_adjacencyList[i].to);
-  }
+  Edge E2_adjacencyList[SEMITONES] = {
+      [8] = {10},  [10] = {12}, [12] = {13}, [13] = {15},
+      [15] = {17}, [17] = {19}, [19] = {20}};
 }
 
 int main(void) {
