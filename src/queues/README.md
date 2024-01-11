@@ -26,3 +26,20 @@
 
 - Tracking calls in call centers.
 
+# Queue implementations
+
+## Linked list
+
+- We can use a linked list to represent a queue.
+
+- Every time you insert an item, add a new node to the end of the linked list.
+
+- Every time you dequeue an item, take it from the head of the linked list and then delete the head node.
+
+- Make sure you have both head and tail pointers or the linked list based queue will be really inefficient.
+
+## The circular queue
+
+- The circular queue is a clever type of array-based queue.
+
+- We never need to shift items with the circular queue!
