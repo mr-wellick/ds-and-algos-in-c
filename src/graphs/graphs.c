@@ -1,5 +1,7 @@
 #include "graphs.h"
 #include "../linked-lists/linked-lists.h"
+#include "../stacks/stacks.h"
+#include <stdbool.h>
 #include <stdio.h>
 
 void addEdge(Node *adjList[], int from, int to) {
@@ -36,6 +38,33 @@ void destroyGraph(Node *adjList[], int length) {
   }
 }
 
-void depthFirstTraversal(Node *adjList[]) {
+void depthFirstTraversal(Node *adjList[], int currVertex) {
+  StackItem *dummyStack = createStackItem(-1);
+  // push currVertex on the dummyStack
+  push(&dummyStack, currVertex);
+  bool seen[7] = {false};
 
+  while (dummyStack->count > 0) {
+    // pop top item off the dummyStack and put it in variable c
+    StackItem *c = pop(&dummyStack);
+    printf("curr value %d\n", c->vertex);
+
+    // if c has not been seen, drop a breadcrumb
+    if (!seen[c->vertex]) {
+      seen[c->vertex] = true;
+
+      Node *list = adjList[c->vertex] ? adjList[c->vertex]->next : NULL;
+
+      while (list) {
+        if (!seen[list->value]) {
+          push(&dummyStack, list->value);
+        }
+        list = list->next;
+      }
+    }
+
+    free(c);
+  }
+
+  free(dummyStack);
 }
