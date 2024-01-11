@@ -9,3 +9,18 @@
     - remove the top item (POP)
     - look at the top item, without removing it
     - check to see if the stack is empty
+
+# Common use cases
+
+- Undo in your word processor.
+
+- Evaluating math expressions.
+
+- Converting from infix expressions to postfix expressions.
+
+- Tracking where to return from C++ function calls.
+
+- They are so fundamental that a stack is hard-wired into every CPU.
+
+- Solving mazes.
+
