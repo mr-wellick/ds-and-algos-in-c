@@ -47,11 +47,11 @@ void depthFirstTraversal(Node *adjList[], int currVertex) {
   while (dummyStack->count > 0) {
     // pop top item off the dummyStack and put it in variable c
     StackItem *c = pop(&dummyStack);
+    printf("curr value %d\n", c->vertex);
 
     // if c has not been seen, drop a breadcrumb
     if (!seen[c->vertex]) {
       seen[c->vertex] = true;
-      printf("curr value %d\n", c->vertex);
 
       Node *list = adjList[c->vertex] ? adjList[c->vertex]->next : NULL;
 

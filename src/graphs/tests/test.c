@@ -59,6 +59,12 @@ void test_depth_first_traversal(void) {
   addEdge(adjList, 5, 6);
   addEdge(adjList, 6, 3);
 
+  /* Since we start at 0, the function should print: 0, 2, 3, 1, 4, 5, 6
+   *
+   *  - The first path we traverse through: 0, 2, 3.
+   *  - We go back to 0 and traverse through the second path: 0, 1, 4, 5, 6
+   *  - Any vertices previously visited will be ignore.
+   */
   depthFirstTraversal(adjList, 0);
   destroyGraph(adjList, STRINGS);
 
