@@ -17,4 +17,12 @@ void destroyGraph(Node *adjList[], int length);
  **/
 void depthFirstTraversal(Node *adjList[], int currVertex);
 
+/*
+ * Process all of the vertices that are one dege away from the start vertex.
+ * Then process all vertices that are two edges away.
+ * Then process all vertices that are three edges away.
+ * Etc...
+ **/
+void breadthFirstTraversal(Node *adjList[], int currVertex);
+
 #endif

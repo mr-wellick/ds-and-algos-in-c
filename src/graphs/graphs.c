@@ -30,9 +30,10 @@ void printGraph(Node *adjList[], int length) {
 void destroyGraph(Node *adjList[], int length) {
   for (int i = 0; i < length; i++) {
     if (adjList[i]) {
-      demolish(&adjList[i]); // free doubly-linked list with help of dummy node:
-                             // adjList[i]
-      free(adjList[i]);      // free dummy node for doubly-linked list
+      // free doubly-linked list with help of dummy node: adjList[i]
+      demolish(&adjList[i]);
+      // free dummy node for doubly-linked list
+      free(adjList[i]);
       adjList[i] = NULL;
     }
   }
@@ -40,7 +41,6 @@ void destroyGraph(Node *adjList[], int length) {
 
 void depthFirstTraversal(Node *adjList[], int currVertex) {
   StackItem *dummyStack = createStackItem(-1);
-  // push currVertex on the dummyStack
   push(&dummyStack, currVertex);
   bool seen[7] = {false};
 
@@ -67,4 +67,18 @@ void depthFirstTraversal(Node *adjList[], int currVertex) {
   }
 
   free(dummyStack);
+}
+
+void breadthFirstTraversal(Node *adjList[], int currVertex) {
+    // Add starting vertex to our queue
+    // Mark the starting vertex as "discovered"
+    //
+    // While the queue is not empty
+    //  Dequeue the top vertex from the queue and place in c
+    //  Process vertex c
+    //
+    //  For each vertex v directly reachable from c
+    //      If v has not yet been "discovered"
+    //          Mark v as "discovered"
+    //          Insert vertex v into the queue
 }
