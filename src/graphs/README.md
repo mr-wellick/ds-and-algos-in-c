@@ -126,6 +126,27 @@ int a[n];
 
 - Read section 9.3 and update readme
 
+# Dynamically allocated arrays
+
+- It's often difficult to determine proper array size when writing programs. It's more convenient to wait unitl the program is run to decide how large the array should be.
+
+- Can do this with by allocating space for an array during execution. Then access the array through a pointer to its first element.
+
+- The calloc function is sometimes used instead, since it initializes the memory that it allocates.
+
+- The realloc function allows us to make the array "grow" or "shrink." 
+
+- Using calloc to dynamically allocate arrays:
+
+```c
+// note: returns a null pointer if the requested space isn't available
+// void *calloc(size_t nmemb, size_t size);
+
+// allocates space for an array with nmemb elements each of which is size bytes long.
+// also, initializes it by setting all bits to 0.
+a = calloc(n, sizeof(int));
+```
+
 # Arrays of Structures
 
 ```c
