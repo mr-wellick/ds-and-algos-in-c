@@ -94,15 +94,18 @@ q = &j // take the address of j and assign it to q (q points to j, again)
 
 ```c
 void decompose(double x, long *int_part, double *frac_part) {
-    *int_part = (long)x;
-    *fract_part = x - *int_part;
+  *int_part = (long)x; /* drops the fractional part of x */
+  *frac_part = x - *int_part;
 }
 
-int i = 5;
-int d = 5;
+long i = 5;
+double d = 5;
 
 // pass the address of i and d
-void decompose(3.14159, &i, &d);
+decompose(3.14159, &i, &d);
+
+printf("%ld\n", i); // prints 3
+printf("%f\n", d);  // prints 0.14159
 ```
 
 ## Pointers as return types
@@ -124,9 +127,9 @@ int *f(void) {
 ```c
 #include <stdlib.h>
 
-malloc() // allocates a block of memory but does not initialize it
-calloc() // allocates a block of memory and clears it
-realloc() // resizes a previously allocated block of memory
+malloc(); // allocates a block of memory but does not initialize it
+calloc(); // allocates a block of memory and clears it
+realloc(); // resizes a previously allocated block of memory
 ```
 
 - Malloc is the most used. When we call a memory allocation function to request a block of memory. The function has no idea what type of data we're planning to store in the block, so it can't return a pointer to an ordinary type. Instead, the function returns a value of type void* (a generic pointer, just a memory address).
@@ -140,10 +143,11 @@ realloc() // resizes a previously allocated block of memory
 - The null pointer is represented by a macro named NULL, so we can test malloc's return value:
 
 ```c
-// some previously and properly declared variable p
-p = malloc(10000)
+int *p = malloc(sizeof(int));
+
+// allocation failed, take proper action
 if (p == NULL) {
-    // allocation failed, take proper action
+    exit(EXIT_FAILURE);
 }
 ```
 
@@ -158,14 +162,15 @@ if (p == NULL) {
 - Calling free releases the block of memory that p points to:
 
 ```c
-p = malloc(...)
-q = malloc(...)
-free(p)
+int *p = malloc(sizeof(int));
+int *q = malloc(sizeof(int));
 
-p = q;
+free(p);
+
+p = q; // pointer assignment: p now points to q
 ```
 
-- The argument to free must be a pointer that was returned using malloc, calloc, realloc. Anything else causes undefined behavior.
+- The argument to free() must be a pointer that was returned using malloc, calloc, realloc. Anything else causes undefined behavior.
 
 ## The dangling pointer
 
@@ -174,11 +179,11 @@ p = q;
 - The call to free(p) deallocates the memory block that p points to but doesn't change p itself. If we forget that p no longer points to a valid memory block, chaos may ensue:
 
 ```c
-char *p = malloc(4)
-free(p)
+char *p = malloc(4);
+free(p);
 
 // WRONG!
-strcpy(p, "abc")
+strcpy(p, "abc");
 ```
 
 - Attempting to access or modify a deallocated memory block causes undefined behavior.
@@ -201,28 +206,41 @@ new_node = malloc(sizeof(root))
 ```
 ## Pointers to Pointers
 
+- Pointers like all arguments are passed by VALUE!
+
 - When an argument to a function is a pointer, we sometimes want the function to be able to modify the variable by making it point somewhere else.
 
 - Doing so requires the use of a pointer to a pointer.
 
 ```c
-// Pointers like all arguments are passed by VALUE!
-struct node *add_to_list(struct node *list, int n);
-// At the point of the call, linked_list is copied into list.
-add_to_list(linked_list, 10)
+/*
+*         _________
+*        |   5   |
+*         -------
+*    p: 0x7ff7b1e0b540
+*
+*    - p is a pointer variable with an address: 0x7ff7b1e0b540
+*    - *p --> de-references the pointer variable and retrieves the value stored at that address: 5.
+*/
+int *p;
+*p = 5;
 
-// Updated to include a double pointer
-void add_to_list(struct node **list, int n) {
-    struct node *new_node = malloc(sizeof(struct node));
+/*
+*                    ___________________
+*                   |  0x7ff7b1e0b540  |
+*                    -----------------
+*    double_pointer: 0x7ff7b83514a0
+*
+*    - double_pointer is a pointer variable with its own unique address as well: 0x7ff7b1e0b540
+*    - double_pointer  --> prints its address 
+*    - *double_pointer --> de-references the pointer variable and retrieves the value stored at that address: 0x7ff7b1e0b540
+*/
+printf("Address of p: %p and the value stored there: %d\n", p, *p);
 
-    if (!new_node) {
-        printf("error\n");
-        exit(EXIT_FAILURE);
-    }
-    new_node->value = n;
-    new_node->next = *list;
+// p is a double pointer variable, so we need the address of a pointer variable: &p
+int **double_pointer = &p;
 
-    *list = new_node;
-}
-
+printf("The address of double_pointer is %p\n", double_pointer);
+printf("De-references double_pointer and retrieves the addres stored there. In this case, it's the address of p: %p\n", *double_pointer);
+printf("If we de-reference one more time, we get the value stored in p: %d\n", **double_pointer);
 ```

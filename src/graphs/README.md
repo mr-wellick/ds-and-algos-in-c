@@ -122,6 +122,10 @@ int a[n];
 
 - Can't have an initializer
 
+# Array as arguments
+
+- Read section 9.3 and update readme
+
 # Arrays of Structures
 
 ```c
@@ -142,4 +146,3 @@ int main(void) {
   return 0;
 }
 ```
-
