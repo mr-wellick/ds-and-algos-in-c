@@ -147,6 +147,19 @@ int a[n];
 a = calloc(n, sizeof(int));
 ```
 
+- The realloc function can resize the array if it's too large or too small.
+
+- When realloc is called, ptr must point to a memory block obtained by a previous call of malloc, calloc, or realloc.
+
+- In practice, realloc ptr points to memory that's being used as an array, although it's not required.
+
+- More about how realloc behaves in chapter 17.3.
+
+```c
+// realloc prototype
+void *realloc(void *ptr, size_t size);
+```
+
 # Arrays of Structures
 
 ```c

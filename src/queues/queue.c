@@ -20,11 +20,39 @@ Queue *createQueue(int size) {
 }
 
 void insert(Queue **q, int value) {
-  // insert value into queue
-  if ((*q)->tail < (*q)->size) {
+  if ((*q)->count < (*q)->size) {
     (*q)->arr[(*q)->tail] = value;
-    (*q)->tail += 1;
+
+    if ((*q)->tail == (*q)->size - 1) {
+      (*q)->tail = 0;
+    } else {
+      (*q)->tail += 1;
+    }
+
     (*q)->count += 1;
   }
 }
 
+int dequeue(Queue **q) {
+  if ((*q)->count > 0) {
+    int item = (*q)->arr[(*q)->head];
+    if ((*q)->head == (*q)->size - 1) {
+      (*q)->head = 0;
+    } else {
+      (*q)->head += 1;
+    }
+
+    (*q)->count -= 1;
+
+    return item;
+  }
+
+  // not found:
+  return -9999;
+}
+void detonate(Queue **q) {
+  free((*q)->arr);
+  free(*q);
+
+  (*q) = NULL;
+}
