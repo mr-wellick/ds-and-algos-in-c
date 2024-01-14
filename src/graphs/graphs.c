@@ -1,8 +1,10 @@
 #include "graphs.h"
 #include "../linked-lists/linked-lists.h"
+#include "../queues/queue.h"
 #include "../stacks/stacks.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void addEdge(Node *adjList[], int from, int to) {
   if (!adjList[from]) {
@@ -39,22 +41,20 @@ void destroyGraph(Node *adjList[], int length) {
   }
 }
 
-void depthFirstTraversal(Node *adjList[], int currVertex) {
+void depthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
   StackItem *dummyStack = createStackItem(-1);
   push(&dummyStack, currVertex);
-  bool seen[7] = {false};
+
+  bool *seen = calloc(adjListSize, sizeof(bool));
 
   while (dummyStack->count > 0) {
-    // pop top item off the dummyStack and put it in variable c
     StackItem *c = pop(&dummyStack);
     printf("curr value %d\n", c->vertex);
 
-    // if c has not been seen, drop a breadcrumb
     if (!seen[c->vertex]) {
-      seen[c->vertex] = true;
+      seen[c->vertex] = true; // if c has not been seen, drop a breadcrumb
 
       Node *list = adjList[c->vertex] ? adjList[c->vertex]->next : NULL;
-
       while (list) {
         if (!seen[list->value]) {
           push(&dummyStack, list->value);
@@ -67,18 +67,35 @@ void depthFirstTraversal(Node *adjList[], int currVertex) {
   }
 
   free(dummyStack);
+  free(seen);
 }
 
-void breadthFirstTraversal(Node *adjList[], int currVertex) {
-    // Add starting vertex to our queue
-    // Mark the starting vertex as "discovered"
-    //
-    // While the queue is not empty
-    //  Dequeue the top vertex from the queue and place in c
-    //  Process vertex c
-    //
-    //  For each vertex v directly reachable from c
-    //      If v has not yet been "discovered"
-    //          Mark v as "discovered"
-    //          Insert vertex v into the queue
+// todo: diagram code and look over lecture slides
+void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
+  // note: circular queue is nice but not knowing how many items we will need
+  // in advance is a problem. it's possible that we allocate a smaller or larger
+  // than needed array size for the queue.
+  Queue *q = createQueue(adjListSize);
+  enqueue(&q, currVertex);
+
+  bool *seen = calloc(adjListSize, sizeof(bool));
+  seen[currVertex] = true; // Mark the starting vertex as "discovered"
+
+  while (q->count > 0) {
+    int c = dequeue(&q);
+    printf("curr value %d\n", c);
+
+    Node *list = adjList[c] ? adjList[c]->next : NULL;
+    while (list) {
+      if (!seen[list->value]) {
+        seen[list->value] = true;
+        enqueue(&q, list->value);
+      }
+
+      list = list->next;
+    }
+  }
+
+  detonate(&q);
+  free(seen);
 }
