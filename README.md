@@ -231,9 +231,10 @@ int *p;
 *                    -----------------
 *    double_pointer: 0x7ff7b83514a0
 *
-*    - double_pointer is a pointer variable with its own unique address as well: 0x7ff7b1e0b540
-*    - double_pointer  --> prints its address 
-*    - *double_pointer --> de-references the pointer variable and retrieves the value stored at that address: 0x7ff7b1e0b540
+*    - double_pointer is a pointer variable with its own unique address as well: 0x7ff7b83514a0
+*    - double_pointer   --> prints its address: 0x7ff7b83514a0
+*    - *double_pointer  --> de-references the pointer variable and retrieves the value stored at that address: 0x7ff7b1e0b540
+*    - **double_pointer --> de-references the pointer variable one more time and retrieves the values stored in p: 5 
 */
 printf("Address of p: %p and the value stored there: %d\n", p, *p);
 

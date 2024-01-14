@@ -21,6 +21,8 @@ void printList(Node **list);
 
 void deleteNode(Node **list, int value);
 
+int getSize(Node *list);
+
 void demolish(Node **list);
 
 #endif
