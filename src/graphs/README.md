@@ -122,11 +122,91 @@ int a[n];
 
 - Can't have an initializer
 
-# Array as arguments
+# Array as Arguments
 
-- Read section 9.3 and update readme
+- When a function parameter is a one-dimensional array, the length of the array can be (and is normally) left unspecified.
 
-# Dynamically allocated arrays
+- The argument can be any one dimensional array whose elements are of the proper type.
+
+```c
+int f(int a[]);
+```
+
+- C doesn't provide an easy way for a function to determine the length of an array passed to it.
+
+- Although we can use the sizeof operator to help determine the length of an array variable, it doesn't give the correct answer for an aray parameter (read section 12.3 on why this is).
+
+```c
+int f(int a[]) {
+    /* WRONG! not the number of elements in a */
+    int len = sizeof(a) / sizeof(a[0]);
+}
+```
+
+- A function has no way of knowing if we passed the correct array length! Instead, we have to supply the length, if the function needs it, as an addional argument.
+
+- Also, a function is allowed to change the elements of an array parameter, and the change is reflected in the corresponding argument.
+
+```c
+int f(int a[], int size) {
+    for(int i = 0; i < size i++) {
+        a[i] = 0;
+    }
+}
+```
+
+- If a parameter is a multidimensional array, only the length of the first dimension may be omitted when the parameter is declared.
+
+```c
+#define LEN 10;
+int sum_two_dimensional_array(int a[][LEN], int n) {
+    int i, j, sum = 0;
+
+    for(i = 0; i < n; i++) {
+        for(j = 0; j < LEN; j++) {
+            sum += a[i][j];
+        }
+    }
+
+    return sum;
+}
+```
+
+- Not being able to pass multidimensional arrays with an arbitrary number of columns can be a nuisance. We can often work around this difficulty by using arrays of pointers (read 13.7).
+
+# Variable-Length Array Parameters
+
+- Using a variable-length array parameter, we can explicitly state that a's length in n.
+
+```c
+int sum_array(int n, int a[n]);
+```
+
+- The value of the first parameter (n) specifies the length of the second parameter (a). The order is important here.
+
+- In general, the length of a variable-length array parameter can be any expression.
+
+```c
+int concatenate(int m, int n, int a[m], int b[n], int c[m+n]);
+```
+
+- Variable-length array parameters are most useful for multidimensional arrays.
+
+```c
+int sum_two_dimensional_array(int n, int m, int a[n][m]) {
+    int i, j, sum = 0;
+
+    for(i = 0; i < n; i++) {
+        for(j = 0; j < m; j++) {
+            sum += a[i][j];
+        }
+    }
+
+    return sum;
+}
+```
+
+# Dynamically Allocated Arrays
 
 - It's often difficult to determine proper array size when writing programs. It's more convenient to wait unitl the program is run to decide how large the array should be.
 
