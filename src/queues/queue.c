@@ -19,7 +19,7 @@ Queue *createQueue(int size) {
   return q;
 }
 
-void insert(Queue **q, int value) {
+void enqueue(Queue **q, int value) {
   if ((*q)->count < (*q)->size) {
     (*q)->arr[(*q)->tail] = value;
 

@@ -4,16 +4,16 @@
 void setUp(void) {}
 void tearDown(void) {}
 
-void test_insert(void) {
+void test_enqueue(void) {
   int size = 5;
   Queue *q = createQueue(size);
 
-  insert(&q, 1);
-  insert(&q, 2);
-  insert(&q, 3);
-  insert(&q, 4);
-  insert(&q, 5);
-  insert(&q, 6);
+  enqueue(&q, 1);
+  enqueue(&q, 2);
+  enqueue(&q, 3);
+  enqueue(&q, 4);
+  enqueue(&q, 5);
+  enqueue(&q, 6);
 
   for (int i = 0; i < size; i++) {
     printf("the value is %d\n", q->arr[i]);
@@ -31,11 +31,11 @@ void test_dequeue(void) {
   int size = 5;
   Queue *q = createQueue(size);
 
-  insert(&q, 1);
-  insert(&q, 2);
-  insert(&q, 3);
-  insert(&q, 4);
-  insert(&q, 5);
+  enqueue(&q, 1);
+  enqueue(&q, 2);
+  enqueue(&q, 3);
+  enqueue(&q, 4);
+  enqueue(&q, 5);
 
   for (int i = 0; i < size; i++) {
     TEST_ASSERT_EQUAL_INT(i + 1, dequeue(&q));
@@ -50,11 +50,11 @@ void test_free_memory(void) {
   int size = 5;
   Queue *q = createQueue(size);
 
-  insert(&q, 1);
-  insert(&q, 2);
-  insert(&q, 3);
-  insert(&q, 4);
-  insert(&q, 5);
+  enqueue(&q, 1);
+  enqueue(&q, 2);
+  enqueue(&q, 3);
+  enqueue(&q, 4);
+  enqueue(&q, 5);
 
   detonate(&q);
 
@@ -63,7 +63,7 @@ void test_free_memory(void) {
 
 int main(void) {
   UNITY_BEGIN();
-  RUN_TEST(test_insert);
+  RUN_TEST(test_enqueue);
   RUN_TEST(test_dequeue);
   RUN_TEST(test_free_memory);
   UNITY_END();
