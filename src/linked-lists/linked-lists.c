@@ -62,7 +62,6 @@ void insert(Node **list, int value) {
   } else {
     // add somewhere in the middle
     Node *p = (*list)->next;
-
     while (p) {
       if (value < p->value) {
         break;
@@ -73,7 +72,6 @@ void insert(Node **list, int value) {
     }
 
     Node *new_node = createNode(value);
-
     new_node->next = p;
     new_node->prev = p->prev;
     p->prev->next = new_node;
@@ -126,7 +124,6 @@ void deleteNode(Node **list, int value) {
     }
   } else {
     parent->next = curr->next;
-
     // somewhere in the middle
     if (curr->next) {
       curr->next->prev = parent;
@@ -137,6 +134,22 @@ void deleteNode(Node **list, int value) {
   }
 
   free(curr);
+}
+
+int getSize(Node *list) {
+  if (!list || !list->next) {
+    printf("nothing to print\n");
+    return 0;
+  }
+
+  Node *p = list->next;
+  int size = 0;
+  while (p) {
+    size += 1;
+    p = p->next;
+  }
+
+  return size;
 }
 
 void demolish(Node **list) {

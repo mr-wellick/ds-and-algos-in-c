@@ -17,7 +17,7 @@ void test_create_node(void) {
   free(list);
 }
 
-void test_insert_at_head() {
+void test_insert_at_head(void) {
   Node *dummy_head = createNode(0);
   insertAtHead(&dummy_head, 5);
 
@@ -27,7 +27,7 @@ void test_insert_at_head() {
   demolish(&dummy_head);
 }
 
-void test_insert_at_rear() {
+void test_insert_at_rear(void) {
   Node *dummy_head = createNode(0);
   insertAtRear(&dummy_head, 5);
 
@@ -41,7 +41,7 @@ void test_insert_at_rear() {
   demolish(&dummy_head);
 }
 
-void test_insertion_methods() {
+void test_insertion_methods(void) {
   Node *dummy_head = createNode(0);
   insertAtHead(&dummy_head, 1);
   insertAtRear(&dummy_head, 2);
@@ -54,7 +54,7 @@ void test_insertion_methods() {
   demolish(&dummy_head);
 }
 
-void test_insert() {
+void test_insert(void) {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 1);
@@ -69,7 +69,7 @@ void test_insert() {
   demolish(&dummy_head);
 }
 
-void test_delete_single_node() {
+void test_delete_single_node(void) {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 1);
@@ -81,7 +81,7 @@ void test_delete_single_node() {
   demolish(&dummy_head);
 }
 
-void test_delete_middle_node() {
+void test_delete_middle_node(void) {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 5);
@@ -94,7 +94,7 @@ void test_delete_middle_node() {
   demolish(&dummy_head);
 }
 
-void test_delete_last_node() {
+void test_delete_last_node(void) {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 5);
@@ -107,7 +107,7 @@ void test_delete_last_node() {
   demolish(&dummy_head);
 }
 
-void test_delete_all_nodes() {
+void test_delete_all_nodes(void) {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 5);
@@ -122,7 +122,7 @@ void test_delete_all_nodes() {
   demolish(&dummy_head);
 }
 
-void test_insert_duplicate_node() {
+void test_insert_duplicate_node(void) {
   Node *dummy_head = createNode(0);
 
   insert(&dummy_head, 5);
@@ -132,7 +132,7 @@ void test_insert_duplicate_node() {
   // printList(&dummy_head);
 }
 
-void test_demolish_list() {
+void test_demolish_list(void) {
   Node *dummy_head = createNode(0);
 
   demolish(&dummy_head);
@@ -150,6 +150,21 @@ void test_demolish_list() {
   printList(&dummy_head);
 }
 
+void test_get_size(void){
+  Node *dummy_head = createNode(0);
+  int size = 7;
+
+  insert(&dummy_head, 1);
+  insert(&dummy_head, 4);
+  insert(&dummy_head, 50);
+  insert(&dummy_head, 2);
+  insert(&dummy_head, 6);
+  insert(&dummy_head, 3);
+  insert(&dummy_head, 5);
+
+  TEST_ASSERT_EQUAL_INT(size, getSize(dummy_head));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_node);
@@ -163,6 +178,7 @@ int main(void) {
   RUN_TEST(test_delete_all_nodes);
   RUN_TEST(test_insert_duplicate_node);
   RUN_TEST(test_demolish_list);
+  RUN_TEST(test_get_size);
   UNITY_END();
 
   return 0;
