@@ -2,47 +2,79 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-StackItem *createStackItem(int vertex) {
-  StackItem *newStackItem = malloc(sizeof(StackItem));
+StackHead *createStack(void) {
+  StackHead *head = malloc(sizeof(StackHead));
 
-  if (!newStackItem) {
-    printf("Error allocating new node in createStackItem()");
+  if (!head) {
+    printf("Error allocating head in createStack()");
     exit(EXIT_FAILURE);
   }
 
-  newStackItem->vertex = vertex;
-  newStackItem->count = 0;
-  newStackItem->next = NULL;
-  return newStackItem;
+  head->count = 0;
+  head->next = NULL;
+
+  return head;
 }
 
-void push(StackItem **stack, int vertex) {
-  if (!(*stack)) {
+StackItem *createStackItem(int vertex) {
+  StackItem *stack = malloc(sizeof(StackItem));
+
+  if (!stack) {
+    printf("Error allocating new node in createStack()");
+    exit(EXIT_FAILURE);
+  }
+
+  stack->vertex = vertex;
+  stack->next = NULL;
+  return stack;
+}
+
+void push(StackHead **head, int vertex) {
+  if (!(*head)) {
     printf("please provide a dummy node");
     exit(EXIT_FAILURE);
+  }
+
+  if (!(*head)->next) {
+    (*head)->next = createStackItem(vertex);
+  } else {
+    StackItem *new = createStackItem(vertex);
+
+    new->next = (*head)->next;
+    (*head)->next = new;
+  }
+
+  (*head)->count += 1;
+}
+
+int pop(StackHead **head) {
+  if (!(*head) || !(*head)->next) {
+    // value not found
+    return -9999;
+  }
+
+  StackItem *top = (*head)->next;
+  (*head)->next = top->next;
+  (*head)->count -= 1;
+
+  int copyOfValue = top->vertex;
+  free(top);
+
+  return copyOfValue;
+}
+
+void freeStack(StackHead **head) {
+  if (!(*head)) {
     return;
   }
 
-  if (!(*stack)->next) {
-    (*stack)->next = createStackItem(vertex);
-  } else {
-    StackItem *newStackItem = createStackItem(vertex);
-    newStackItem->next = (*stack)->next;
-    (*stack)->next = newStackItem;
+  StackItem *curr = (*head)->next;
+  while (curr) {
+    StackItem *next = curr->next;
+    free(curr);
+    curr = next;
   }
 
-  (*stack)->count += 1;
-}
-
-StackItem *pop(StackItem **stack) {
-  if (!(*stack) || !(*stack)->next) {
-    return NULL;
-  }
-
-  StackItem *top = (*stack)->next;
-  (*stack)->next = top->next;
-
-  (*stack)->count -= 1;
-
-  return top;
+  free(*head);
+  *head = NULL;
 }
