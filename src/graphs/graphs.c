@@ -2,6 +2,7 @@
 #include "../linked-lists/linked-lists.h"
 #include "../queues/queue.h"
 #include "../stacks/stacks.h"
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -99,7 +100,25 @@ void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
 }
 
 void dijkstras(Node **adjList, int adjListSize, int currVertex) {
-  int *distances = calloc(adjListSize, sizeof(int));
+  int *dist = calloc(adjListSize, sizeof(int));
   bool *done = calloc(adjListSize, sizeof(bool));
 
+  for (int i = 0; i < adjListSize; i++) {
+    dist[i] = INFINITY;
+  }
+
+  // while there are unprocessed vertices
+  bool *start = &done[0];
+  bool *end = &done[adjListSize - 1];
+
+  while (!(*start)) {
+    printf("the value should be 0 for false %d\n", *start);
+    *start = true;
+
+    if (start == end) {
+      start = &done[0];
+    } else {
+      start += 1;
+    }
+  }
 }

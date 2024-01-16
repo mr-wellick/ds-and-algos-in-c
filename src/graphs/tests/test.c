@@ -97,11 +97,35 @@ void test_breadth_first_traversal(void) {
   destroyGraph(adjList, STRINGS);
 }
 
+void test_dijkstras(void) {
+  Node *adjList[STRINGS] = {NULL};
+
+  //     >(1)<--->(4) ---->(5)
+  //    /          |       /|
+  // (0)     ------|------- |
+  //    \   v      v        v
+  //     >(2) --> (3) <----(6)
+  addEdge(adjList, 0, 1);
+  addEdge(adjList, 0, 2);
+  addEdge(adjList, 1, 4);
+  addEdge(adjList, 2, 3);
+  addEdge(adjList, 4, 1);
+  addEdge(adjList, 4, 3);
+  addEdge(adjList, 4, 5);
+  addEdge(adjList, 5, 2);
+  addEdge(adjList, 5, 6);
+  addEdge(adjList, 6, 3);
+
+  dijkstras(adjList, STRINGS, 0);
+  destroyGraph(adjList, STRINGS);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_create_graph);
   RUN_TEST(test_depth_first_traversal);
   RUN_TEST(test_breadth_first_traversal);
+  RUN_TEST(test_dijkstras);
   UNITY_END();
 
   return 0;
