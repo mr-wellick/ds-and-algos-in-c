@@ -99,22 +99,6 @@ void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
   free(seen);
 }
 
-bool findEdge(Node *adjList, int from, int to) {
-  if (!adjList) {
-    return false;
-  }
-
-  Node *p = adjList->next;
-  while (p) {
-    if (p->value == to) {
-      return true;
-    }
-    p = p->next;
-  }
-
-  return false;
-}
-
 int minDistance(int dist[], bool done[], int adjListSize) {
   int min = INT_MAX;
   int min_index = -1;
