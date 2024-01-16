@@ -3,7 +3,7 @@
 
 #include "../linked-lists/linked-lists.h"
 
-void addEdge(Node *adjList[], int from, int to);
+void addEdge(Node *adjList[], int from, int to, int weight);
 
 // modularize length later
 void printGraph(Node *adjList[], int length);
@@ -24,5 +24,28 @@ void depthFirstTraversal(Node *adjList[], int adjListSize, int currVertex);
  * Etc...
  **/
 void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex);
+
+/*
+ * Dijkstra's algo splits vertices into two distict sets: unsettled and settled
+ *
+ *  - Unsettled vertex: A vertex v is unsettled if we don't know the optimal distance to it from the starting vertex s.
+ *  - Settled vertex: A vertex v is settled if we have learned the optimal distance to it from the starting vertex s.
+ *
+ * Initially, all vertices are unsettled. Ends once all vertices are in the settled set.
+ *
+ *  - Dijkstra's Algorithm uses 2 data structures
+ *  
+ *  1. An array called Dist that holds the current best known cost to get from s to every other vertex in the graph. 
+ *
+ *      for each vertex i, Dist[i] starts out with a value of
+ *          0 for vertex s
+ *          Infinity for all other vertices
+ *
+ *  2. An array called Done that holds true for each vertex that has been fully processed and false otherwise.
+ *
+ *      - for each vertex i, Done[i] starts out with a value of false
+ *
+ **/
+int *dijkstras(Node *adjList[], int adjListSize, int currVertex);
 
 #endif

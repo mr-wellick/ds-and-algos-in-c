@@ -240,6 +240,58 @@ a = calloc(n, sizeof(int));
 void *realloc(void *ptr, size_t size);
 ```
 
+# Pointer Arithmetic
+
+- Using pointer arithmetic or address arithmetic we can access the other elements of an array.
+
+- C supports three forms of pointer arithmetic:
+    
+    1. Adding an integer to a pointer
+    2. Subtracting an integer from a pointer
+    3. Subtracting one pointer from another
+
+- Adding an integer to a pointer
+
+```c
+int a[101];
+int *p;
+int *q;
+
+// Adding an integer to a pointer
+p = &a[2] // p points to: |_|_|x|_|_|
+q = p + 3 // q points to: |_|_|_|_|_|x|_|
+
+```
+
+- Subtracting an integer from a pointer
+
+```c
+int a[101];
+int *p;
+int *q;
+
+// Adding an integer to a pointer
+p = &a[2] // p points to: |_|_|x|_|_|
+q = p - 1 // q points to: |_|x|_|_|_|_|_|
+```
+
+- Subtracting One Pointer from Another. When one pointer is subtracted from another, the result is the distance (measured in array elements) between the pointers.
+
+```c
+int a[101];
+int *p;
+int *q;
+
+p = &a[5];
+q = &a[1];
+
+i = p - q // i is 4
+i = q - p // i is -4
+```
+
+- Note: performing arithmetic on a pointer that doesn't point to an array element causes undefined behavoir. 
+Furthermore, the effect of subtracting one pointer from another is undefined unless both point to elements of the same array.
+
 # Arrays of Structures
 
 ```c

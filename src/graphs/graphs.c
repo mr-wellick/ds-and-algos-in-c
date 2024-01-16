@@ -2,17 +2,18 @@
 #include "../linked-lists/linked-lists.h"
 #include "../queues/queue.h"
 #include "../stacks/stacks.h"
+#include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-void addEdge(Node *adjList[], int from, int to) {
+void addEdge(Node *adjList[], int from, int to, int weight) {
   if (!adjList[from]) {
-    Node *dummyHead = createNode(0);
-    insertAtRear(&dummyHead, to);
+    Node *dummyHead = createNode(0, weight);
+    insertAtRear(&dummyHead, to, weight);
     adjList[from] = dummyHead;
   } else if (adjList[from]) {
-    insertAtRear(&adjList[from], to);
+    insertAtRear(&adjList[from], to, weight);
   }
 }
 
@@ -68,11 +69,11 @@ void depthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
   free(seen);
 }
 
-// todo: diagram code and look over lecture slides
 void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
   // note: circular queue is nice but not knowing how many items we will need
   // in advance is a problem. it's possible that we allocate a smaller or larger
   // than needed array size for the queue.
+  // will lead to seg fault errors
   Queue *q = createQueue(adjListSize);
   enqueue(&q, currVertex);
 
@@ -96,4 +97,65 @@ void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
 
   detonate(&q);
   free(seen);
+}
+
+bool findEdge(Node *adjList, int from, int to) {
+  if (!adjList) {
+    return false;
+  }
+
+  Node *p = adjList->next;
+  while (p) {
+    if (p->value == to) {
+      return true;
+    }
+    p = p->next;
+  }
+
+  return false;
+}
+
+int minDistance(int dist[], bool done[], int adjListSize) {
+  int min = INT_MAX;
+  int min_index = -1;
+
+  for (int i = 0; i < adjListSize; i++) {
+    if (!done[i] && dist[i] < min) {
+      min = dist[i];
+      min_index = i;
+    }
+  }
+
+  return min_index;
+}
+
+int *dijkstras(Node **adjList, int adjListSize, int currVertex) {
+  int *dist = calloc(adjListSize, sizeof(int));
+  bool *done = calloc(adjListSize, sizeof(bool));
+
+  for (int i = 0; i < adjListSize; i++) {
+    dist[i] = INT_MAX;
+  }
+
+  dist[currVertex] = 0; // distance from currVertex is always 0
+
+  for (int i = 0; i < adjListSize - 1; i++) {
+    int u = minDistance(dist, done, adjListSize);
+    done[u] = true;
+
+    Node *currEdge = adjList[u] ? adjList[u]->next : NULL;
+    while (currEdge) {
+      int v = currEdge->value;
+
+      if (!done[v] && dist[u] != INT_MAX &&
+          dist[u] + currEdge->weight < dist[v]) {
+        dist[v] = dist[u] + currEdge->weight;
+      }
+
+      currEdge = currEdge->next;
+    }
+  }
+
+  free(done);
+  return &dist[0];
 }

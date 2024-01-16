@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Node *createNode(int value) {
+Node *createNode(int value, int weight) {
   Node *node = malloc(sizeof(Node));
 
   if (!node) {
@@ -10,14 +10,15 @@ Node *createNode(int value) {
     exit(EXIT_FAILURE);
   }
   node->value = value;
+  node->weight = weight;
   node->next = NULL;
   node->prev = NULL;
 
   return node;
 }
 
-void insertAtHead(Node **list, int value) {
-  Node *new_node = createNode(value);
+void insertAtHead(Node **list, int value, int weight) {
+  Node *new_node = createNode(value, weight);
 
   // if our list is empty -> add to front
   if (!(*list)->next) {
@@ -32,13 +33,13 @@ void insertAtHead(Node **list, int value) {
   }
 }
 
-void insertAtRear(Node **list, int value) {
+void insertAtRear(Node **list, int value, int weight) {
   // if our list is empty -> add to front
   if (!(*list)->next) {
-    insertAtHead(list, value);
+    insertAtHead(list, value, weight);
   } else {
     // add node to rear
-    Node *new_node = createNode(value);
+    Node *new_node = createNode(value, weight);
     (*list)->prev->next = new_node;
     new_node->next = NULL;
     new_node->prev = (*list)->prev;
@@ -46,19 +47,19 @@ void insertAtRear(Node **list, int value) {
   }
 }
 
-void insert(Node **list, int value) {
+void insert(Node **list, int value, int weight) {
   // if our list is empty -> add to front
   if (!(*list)->next) {
-    insertAtHead(list, value);
+    insertAtHead(list, value, weight);
     return;
   }
 
   // if value is less than head  -> add to front
   if (value < (*list)->next->value) {
-    insertAtHead(list, value);
+    insertAtHead(list, value, weight);
   } else if (value > (*list)->prev->value) {
     // if value is greater than tail -> add to end
-    insertAtRear(list, value);
+    insertAtRear(list, value, weight);
   } else {
     // add somewhere in the middle
     Node *p = (*list)->next;
@@ -71,7 +72,7 @@ void insert(Node **list, int value) {
       p = p->next;
     }
 
-    Node *new_node = createNode(value);
+    Node *new_node = createNode(value, weight);
     new_node->next = p;
     new_node->prev = p->prev;
     p->prev->next = new_node;
@@ -93,6 +94,7 @@ void printList(Node **list) {
     printf("------------------------------------\n");
     printf("The address of current: %p\n", p);
     printf("The value is: %d \n", p->value);
+    printf("The weight is: %d \n", p->weight);
     printf("The address of next: %p \n", p->next);
     printf("The address of prev: %p \n\n", p->prev);
     p = p->next;

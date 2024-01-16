@@ -5,17 +5,18 @@
 
 typedef struct Node {
   int value;
+  int weight;
   struct Node *next;
   struct Node *prev;
 } Node;
 
-Node *createNode(int value);
+Node *createNode(int value, int weight);
 
-void insertAtHead(Node **list, int value);
+void insertAtHead(Node **list, int value, int weight);
 
-void insertAtRear(Node **list, int value);
+void insertAtRear(Node **list, int value, int weight);
 
-void insert(Node **list, int value);
+void insert(Node **list, int value, int weig);
 
 void printList(Node **list);
 
