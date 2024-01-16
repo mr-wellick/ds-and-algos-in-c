@@ -42,19 +42,19 @@ void destroyGraph(Node *adjList[], int length) {
 }
 
 void depthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
-  StackItem *dummyStack = createStackItem(-1);
+  StackHead *dummyStack = createStack();
   push(&dummyStack, currVertex);
 
   bool *seen = calloc(adjListSize, sizeof(bool));
 
   while (dummyStack->count > 0) {
-    StackItem *c = pop(&dummyStack);
-    printf("curr value %d\n", c->vertex);
+    int c = pop(&dummyStack);
+    printf("curr value %d\n", c);
 
-    if (!seen[c->vertex]) {
-      seen[c->vertex] = true; // if c has not been seen, drop a breadcrumb
+    if (!seen[c]) {
+      seen[c] = true; // if c has not been seen, drop a breadcrumb
 
-      Node *list = adjList[c->vertex] ? adjList[c->vertex]->next : NULL;
+      Node *list = adjList[c] ? adjList[c]->next : NULL;
       while (list) {
         if (!seen[list->value]) {
           push(&dummyStack, list->value);
@@ -62,11 +62,9 @@ void depthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
         list = list->next;
       }
     }
-
-    free(c);
   }
 
-  free(dummyStack);
+  freeStack(&dummyStack);
   free(seen);
 }
 
