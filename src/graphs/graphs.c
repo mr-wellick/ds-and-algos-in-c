@@ -131,10 +131,11 @@ int minDistance(int dist[], bool done[], int adjListSize) {
 
 int *dijkstras(Node **adjList, int adjListSize, int currVertex) {
   int *dist = calloc(adjListSize, sizeof(int));
-  bool *done = calloc(adjListSize, sizeof(bool));
+  bool done[adjListSize];
 
   for (int i = 0; i < adjListSize; i++) {
     dist[i] = INT_MAX;
+    done[i] = false;
   }
 
   dist[currVertex] = 0; // distance from currVertex is always 0
@@ -156,6 +157,5 @@ int *dijkstras(Node **adjList, int adjListSize, int currVertex) {
     }
   }
 
-  free(done);
-  return &dist[0];
+  return dist;
 }
