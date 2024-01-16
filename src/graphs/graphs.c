@@ -97,3 +97,9 @@ void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
   detonate(&q);
   free(seen);
 }
+
+void dijkstras(Node **adjList, int adjListSize, int currVertex) {
+  int *distances = calloc(adjListSize, sizeof(int));
+  bool *done = calloc(adjListSize, sizeof(bool));
+
+}
