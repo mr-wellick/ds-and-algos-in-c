@@ -2,18 +2,18 @@
 #include "../linked-lists/linked-lists.h"
 #include "../queues/queue.h"
 #include "../stacks/stacks.h"
-#include <math.h>
+#include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-void addEdge(Node *adjList[], int from, int to) {
+void addEdge(Node *adjList[], int from, int to, int weight) {
   if (!adjList[from]) {
-    Node *dummyHead = createNode(0);
-    insertAtRear(&dummyHead, to);
+    Node *dummyHead = createNode(0, weight);
+    insertAtRear(&dummyHead, to, weight);
     adjList[from] = dummyHead;
   } else if (adjList[from]) {
-    insertAtRear(&adjList[from], to);
+    insertAtRear(&adjList[from], to, weight);
   }
 }
 
@@ -99,26 +99,63 @@ void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
   free(seen);
 }
 
-void dijkstras(Node **adjList, int adjListSize, int currVertex) {
+bool findEdge(Node *adjList, int from, int to) {
+  if (!adjList) {
+    return false;
+  }
+
+  Node *p = adjList->next;
+  while (p) {
+    if (p->value == to) {
+      return true;
+    }
+    p = p->next;
+  }
+
+  return false;
+}
+
+int minDistance(int dist[], bool done[], int adjListSize) {
+  int min = INT_MAX;
+  int min_index = -1;
+
+  for (int i = 0; i < adjListSize; i++) {
+    if (!done[i] && dist[i] < min) {
+      min = dist[i];
+      min_index = i;
+    }
+  }
+
+  return min_index;
+}
+
+int *dijkstras(Node **adjList, int adjListSize, int currVertex) {
   int *dist = calloc(adjListSize, sizeof(int));
   bool *done = calloc(adjListSize, sizeof(bool));
 
   for (int i = 0; i < adjListSize; i++) {
-    dist[i] = INFINITY;
+    dist[i] = INT_MAX;
   }
 
-  // while there are unprocessed vertices
-  bool *start = &done[0];
-  bool *end = &done[adjListSize - 1];
+  dist[currVertex] = 0; // distance from currVertex is always 0
 
-  while (!(*start)) {
-    printf("the value should be 0 for false %d\n", *start);
-    *start = true;
+  for (int i = 0; i < adjListSize - 1; i++) {
+    int u = minDistance(dist, done, adjListSize);
+    done[u] = true;
 
-    if (start == end) {
-      start = &done[0];
-    } else {
-      start += 1;
+    Node *currEdge = adjList[u] ? adjList[u]->next : NULL;
+    while (currEdge) {
+      int v = currEdge->value;
+
+      if (!done[v] && dist[u] != INT_MAX &&
+          dist[u] + currEdge->weight < dist[v]) {
+        dist[v] = dist[u] + currEdge->weight;
+      }
+
+      currEdge = currEdge->next;
     }
   }
+
+  free(done);
+  return &dist[0];
 }

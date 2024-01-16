@@ -3,7 +3,7 @@
 
 #include "../linked-lists/linked-lists.h"
 
-void addEdge(Node *adjList[], int from, int to);
+void addEdge(Node *adjList[], int from, int to, int weight);
 
 // modularize length later
 void printGraph(Node *adjList[], int length);
@@ -46,6 +46,6 @@ void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex);
  *      - for each vertex i, Done[i] starts out with a value of false
  *
  **/
-void dijkstras(Node *adjList[], int adjListSize, int currVertex);
+int *dijkstras(Node *adjList[], int adjListSize, int currVertex);
 
 #endif
