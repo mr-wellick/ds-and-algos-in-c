@@ -21,7 +21,7 @@ void test_create_node(void) {
   TEST_ASSERT_NULL(root);
 }
 
-void test_tree_insertion() {
+void test_tree_insertion(void) {
   Node *root = NULL;
 
   insert(&root, 3);
@@ -43,7 +43,7 @@ void test_tree_insertion() {
   TEST_ASSERT_NULL(root);
 }
 
-void test_find_value() {
+void test_find_value(void) {
   Node *root = NULL;
 
   insert(&root, 3);
@@ -61,7 +61,7 @@ void test_find_value() {
   TEST_ASSERT_NULL(root);
 }
 
-void test_find_min() {
+void test_find_min(void) {
   Node *root = NULL;
 
   TEST_ASSERT_NULL(min(root));
@@ -80,7 +80,7 @@ void test_find_min() {
   TEST_ASSERT_NULL(root);
 }
 
-void test_find_max() {
+void test_find_max(void) {
   Node *root = NULL;
 
   TEST_ASSERT_NULL(max(root));
@@ -99,7 +99,7 @@ void test_find_max() {
   TEST_ASSERT_NULL(root);
 }
 
-void test_erase_leaf_node() {
+void test_erase_leaf_node(void) {
   // the root node
   Node *root = NULL;
 
@@ -125,7 +125,7 @@ void test_erase_leaf_node() {
   TEST_ASSERT_NULL(root);
 }
 
-void test_erase_node_w_one_child() {
+void test_erase_node_w_one_child(void) {
   // the root node
   Node *root = NULL;
 
@@ -163,7 +163,7 @@ void test_erase_node_w_one_child() {
   TEST_ASSERT_NULL(root);
 }
 
-void test_erase_node_w_two_child() {
+void test_erase_node_w_two_child(void) {
   // the root node
   Node *root = NULL;
   insert(&root, 5);

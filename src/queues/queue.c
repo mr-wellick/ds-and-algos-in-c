@@ -50,6 +50,7 @@ int dequeue(Queue **q) {
   // not found:
   return -9999;
 }
+
 void detonate(Queue **q) {
   free((*q)->arr);
   free(*q);
