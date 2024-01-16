@@ -68,11 +68,11 @@ void depthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
   free(seen);
 }
 
-// todo: diagram code and look over lecture slides
 void breadthFirstTraversal(Node *adjList[], int adjListSize, int currVertex) {
   // note: circular queue is nice but not knowing how many items we will need
   // in advance is a problem. it's possible that we allocate a smaller or larger
   // than needed array size for the queue.
+  // will lead to seg fault errors
   Queue *q = createQueue(adjListSize);
   enqueue(&q, currVertex);
 
