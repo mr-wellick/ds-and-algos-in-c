@@ -22,7 +22,8 @@ void test_selection_sort(void) {
 
   selectionSort(elements, size);
 
-  printf("sorted array: \n\n");
+  printf("\n");
+  printf("sorted array: \n");
   for (int i = 0; i < size; i++) {
     printf("the value is %d\n", elements[i]);
   }
