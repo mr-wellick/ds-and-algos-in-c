@@ -39,7 +39,7 @@
 
 - No, Selection Sort takes just as many steps either way!
 
-- Is selection sort stable or unstable?
+- Is selection sort stable or unstable? It's unstable.
 
 # What is a Stable Sort?
 
