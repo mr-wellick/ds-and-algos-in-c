@@ -9,7 +9,7 @@
 
 void addEdge(Node *adjList[], int from, int to, int weight) {
   if (!adjList[from]) {
-    Node *dummyHead = createNode(0, weight);
+    Node *dummyHead = createNode(0, 0);
     insertAtRear(&dummyHead, to, weight);
     adjList[from] = dummyHead;
   } else if (adjList[from]) {
