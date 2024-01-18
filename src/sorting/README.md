@@ -2,6 +2,7 @@
 
 - The following sorting algorithms are inefficient and won't use them often. But it's like diagramming sentences and will serve as practice.
     - Selection Sort
+    - Insertion Sort
 
 - Sorting is the process of ordering items based on one or more rules subject to one or more constraints.
     - Items: what are we sorting?
@@ -37,3 +38,21 @@
 - Question: Are there any kinds of input data where Selection Sort is either more or less efficient? If our array is mostly sorted, for example.
 
 - No, Selection Sort takes just as many steps either way!
+
+- Is selection sort stable or unstable?
+
+# What is a Stable Sort?
+
+- Imagine N people line up to buy medication at a drugstore.
+
+- The drugstore wants to sort them and serve them based on urgency.
+
+- The drugstore needs to pick a sort algorithm to re-order the guests. They can choose between a stable or unstable sort.
+
+- An unstable sorting algorithm re-orders the items without taking into account their initial ordering.
+
+- A stable sorting algorithm does take into account the inital ordering when sorting, maintaining the order of similar-valued items.
+
+# Insertion Sort
+
+-
