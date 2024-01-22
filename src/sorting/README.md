@@ -3,6 +3,7 @@
 - The following sorting algorithms are inefficient and won't use them often. But it's like diagramming sentences and will serve as practice.
     - Selection Sort
     - Insertion Sort
+    - Bubble Sort
 
 - Sorting is the process of ordering items based on one or more rules subject to one or more constraints.
     - Items: what are we sorting?
@@ -89,9 +90,9 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 
 - Start at the top element of the array.
 
-- Compare the first two elemets: A[0] and A[1]. If they're out of order, the swap them.
+- Compare the first two elemets: A[0] and A[1]. If they're out of order, then swap them.
 
-- Then advance one element in your array. Compare these two elements: A[1] and A[2]. If they're out of order, the swap them.
+- Then advance one element in your array. Compare these two elements: A[1] and A[2]. If they're out of order, then swap them.
 
 - When you hit the end, if you made at least one swap, then repeat the whole process again.
 
