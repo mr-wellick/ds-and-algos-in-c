@@ -98,4 +98,37 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 
 - Big O: N passes of N "bubbles" = N^2
 
-- Can it run faster? Yes on pre-sorted arrays like insertion sort.
+- Can it run faster? Yes, if the array is sorted (like insertion sort).
+
+- Bubble sort is a stable sort.
+
+# Shell Sort
+
+- Shell sort based on underlying procedure h-sorting.
+
+- Method for h-sorting an array:
+
+    - Pick a value of h
+    - For each element in the array:
+        - If A[i] and A[i+h] are out of order:
+            - Swap the two elements
+        - If you swapped any elements during the last pass, then repeat entire process using same h value.
+
+- After our array is sorted, we say it's h-sorted. For example, if we choose h=3, then after the algorithm completes, every element is smaller than the element that is 3 items later in the array.
+
+- If h=1, then we have bubble sort!
+
+- Shellsort works as follows:
+
+    - Step 1: Select a sequenve of decreasing h-values ending with an h-value of 1 (e.g. 8, 4, 2, 1)
+    - Step 2: First, 8-sort the array. Then, 4-sort. Then, 2-sort. Then, 1-sort (bubble sort).
+
+- The array is now fully sorted.
+
+- Each h-sort more correctly sorts the array, making the process simpler each iteration.
+
+- Big O: The worst case is n^2, but the average case has not been determined mathematically. Experimental measurements suggest that the average running time is O(n^1.25). 
+
+- Shell sort is not stable because items that are far apart (h items apart) can move far distances, jumping earlier in the array than items that have their same value.
+
+- Sometimes used in embedded systems with low memory. Shell sort uses fixed amount of memory.
