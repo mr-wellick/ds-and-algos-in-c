@@ -53,6 +53,10 @@
 
 - A stable sorting algorithm does take into account the inital ordering when sorting, maintaining the order of similar-valued items.
 
+<img src="./img/stable-sort.jpeg"/>
+
+<img src="./img/unstable-sort.jpeg"/>
+
 # Insertion Sort
 
 -
