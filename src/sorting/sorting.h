@@ -12,4 +12,6 @@ void bubbleSort(int items[], int n);
 // These sorting algorithms are used in real life. Efficient.
 void quickSort(int items[], int first, int last);
 
+void mergeSort();
+
 #endif

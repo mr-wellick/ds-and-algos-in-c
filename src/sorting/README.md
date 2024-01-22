@@ -168,3 +168,11 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 - Quicksort is not stable. The partition function may swap values from the end to the start of the array, bypassing earlier items with the same value.
 
 - Variants of Quicksort are used virtually everywhere. Rarely is the vanilla version showed here used, but variants are used that mitigate the worst-case behavior
+
+# Mergesort
+
+- Another efficient sort. But we need to learn another algorithm called "merge" before we learn mergesort.
+
+- The basic merge algorithm takes two-presorted arrays as inputs and outputs a combined, third sorted array.
+
+<img src="./img/merge.jpeg"/>

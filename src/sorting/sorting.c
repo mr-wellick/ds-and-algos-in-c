@@ -100,3 +100,5 @@ void quickSort(int items[], int first, int last) {
     quickSort(items, pivotIndex + 1, last);
   }
 }
+
+void mergeSort() {}
