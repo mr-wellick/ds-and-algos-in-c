@@ -156,3 +156,9 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 3. Divide: move all elements that are less than or equal to P to the left of the array. Move all elements greater than P to the right (this is called partitioning).
 
 4. Conquer: recursively repeat this process on the left sub-array and then the right sub-array.
+
+- Big O: N log(N)
+
+- If our array is sorted and we use quicksort, Big O is N^2 (worst case).
+
+<img src="./img/worst-case-quicksort.jpeg"/>
