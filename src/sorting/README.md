@@ -80,3 +80,7 @@
 
 - Note, if all books are in the proper order, insertion sort never needs to do any shifting.
 In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered set of books is the worst case, N^2.
+
+- Can be used to sort a linked-list (doubly-linked list).
+
+- Insertion sort is a stable sort.
