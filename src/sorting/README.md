@@ -58,4 +58,20 @@
 
 # Insertion Sort
 
--
+- Insertion sort is probably the most common way to sort playing cards.
+
+- Focus on first 2 books.
+    - If the last book in this set is in the wrong order:
+        - Remove it from the shelf.
+        - Shift the book before it to the right.
+        - Insert our book into the proper slot.
+
+- Focus on first 3 books.
+    - If the last book in this set is in the wrong order:
+        - Remove it from the shelf.
+        - Shift the book before it to the right as necessary.
+        - Insert our book into the proper slot.
+
+- Repeat until the shelf is sorted.
+
+<img src="./img/books.jpeg"/>

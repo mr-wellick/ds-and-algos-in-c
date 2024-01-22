@@ -4,4 +4,6 @@
 
 void selectionSort(int items[], int n);
 
+void insertionSort(int items[], int n);
+
 #endif
