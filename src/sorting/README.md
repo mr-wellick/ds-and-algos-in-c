@@ -162,3 +162,9 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 - If our array is sorted and we use quicksort, Big O is N^2 (worst case).
 
 <img src="./img/worst-case-quicksort.jpeg"/>
+
+- If you happen to know your data will be mostly sorted or in reverse order, avoid quicksort.
+
+- Quicksort is not stable. The partition function may swap values from the end to the start of the array, bypassing earlier items with the same value.
+
+- Variants of Quicksort are used virtually everywhere. Rarely is the vanilla version showed here used, but variants are used that mitigate the worst-case behavior
