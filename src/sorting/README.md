@@ -96,3 +96,6 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 
 - When you hit the end, if you made at least one swap, then repeat the whole process again.
 
+- Big O: N passes of N "bubbles" = N^2
+
+- Can it run faster? Yes on pre-sorted arrays like insertion sort.

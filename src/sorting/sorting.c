@@ -1,4 +1,5 @@
 #include "./sorting.h"
+#include <stdbool.h>
 
 void selectionSort(int items[], int n) {
   for (int i = 0; i < n; i++) {
@@ -34,4 +35,20 @@ void insertionSort(int items[], int n) {
   }
 }
 
-void bubbleSort(int items[], int n) {}
+void bubbleSort(int items[], int n) {
+  bool atLeastOneSwap;
+
+  do {
+    atLeastOneSwap = false;
+
+    for (int j = 0; j < (n - 1); j++) {
+      if (items[j] > items[j + 1]) {
+        int temp = items[j];
+        items[j] = items[j + 1];
+        items[j + 1] = temp;
+
+        atLeastOneSwap = true;
+      }
+    }
+  } while (atLeastOneSwap);
+}
