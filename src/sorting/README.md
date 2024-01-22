@@ -60,6 +60,8 @@
 
 - Insertion sort is probably the most common way to sort playing cards.
 
+<img src="./img/books.jpeg"/>
+
 - Focus on first 2 books.
     - If the last book in this set is in the wrong order:
         - Remove it from the shelf.
@@ -74,4 +76,7 @@
 
 - Repeat until the shelf is sorted.
 
-<img src="./img/books.jpeg"/>
+- Big O of insertion sort: 1 + 2 + ... + N-1 which is roughly N^2 steps.
+
+- Note, if all books are in the proper order, insertion sort never needs to do any shifting.
+In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered set of books is the worst case, N^2.
