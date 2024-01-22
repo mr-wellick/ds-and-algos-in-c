@@ -33,3 +33,5 @@ void insertionSort(int items[], int n) {
     items[i + 1] = sortMe;
   }
 }
+
+void bubbleSort(int items[], int n) {}

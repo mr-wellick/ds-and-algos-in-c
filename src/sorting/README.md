@@ -84,3 +84,14 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 - Can be used to sort a linked-list (doubly-linked list).
 
 - Insertion sort is a stable sort.
+
+# Bubble Sort
+
+- Start at the top element of the array.
+
+- Compare the first two elemets: A[0] and A[1]. If they're out of order, the swap them.
+
+- Then advance one element in your array. Compare these two elements: A[1] and A[2]. If they're out of order, the swap them.
+
+- When you hit the end, if you made at least one swap, then repeat the whole process again.
+
