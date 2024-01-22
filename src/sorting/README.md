@@ -132,3 +132,27 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 - Shell sort is not stable because items that are far apart (h items apart) can move far distances, jumping earlier in the array than items that have their same value.
 
 - Sometimes used in embedded systems with low memory. Shell sort uses fixed amount of memory.
+
+# Advanced Sorting Algorithms
+
+- You can sort billions of values in seconds.
+    - Quicksort
+    - Mergesort
+
+- These sorts generally work as follows:
+
+    1. Divide the elements to be sorted into two groups of roughly equal size.
+    2. Sort each of these smaller groups of elements (conquer).
+    3. Combine the two sorted groups into one large sorted list.
+
+- Divide and conquer ---> Think recursion
+
+# Quicksort
+
+1. If the array contains only 0 or 1 element, return.
+
+2. Select an arbitrary element P from the array (typically the first element in the array).
+
+3. Divide: move all elements that are less than or equal to P to the left of the array. Move all elements greater than P to the right (this is called partitioning).
+
+4. Conquer: recursively repeat this process on the left sub-array and then the right sub-array.

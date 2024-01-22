@@ -52,3 +52,51 @@ void bubbleSort(int items[], int n) {
     }
   } while (atLeastOneSwap);
 }
+
+int partition(int items[], int low, int high) {
+  int pi = low;
+  // select first item as our pivot
+  int pivot = items[low];
+
+  do {
+    // find first value > than the pivot
+    while (low <= high && items[low] <= pivot)
+      low++;
+
+    // find first value < than the pivot
+    while (items[high] > pivot)
+      high--;
+
+    // swap larger with the smaller
+    if (low < high) {
+      int temp = items[low];
+      items[low] = items[high];
+      items[high] = temp;
+    }
+
+  } while (low < high);
+
+  // swap pivot to proper position in array
+  int temp = items[pi];
+  items[pi] = items[high];
+  items[high] = temp;
+
+  // return pivots index in the array
+  pi = high;
+  return pi;
+};
+
+/*
+ * @items:  - array to sort
+ * @first:  - starting element of the array to sort
+ * @last:   - the last element of the array to sort
+ */
+void quickSort(int items[], int first, int last) {
+  // only run for arrays of at least two items
+  if (last - first >= 1) {
+    int pivotIndex = partition(items, first, last);
+
+    quickSort(items, first, pivotIndex - 1);
+    quickSort(items, pivotIndex + 1, last);
+  }
+}
