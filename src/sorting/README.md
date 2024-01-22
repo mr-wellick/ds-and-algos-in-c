@@ -18,14 +18,12 @@
 # Selection Sort
 
 - Look at all N books, select the shortest book.
+
 - Swap this with the first book.
 
-<img src="./img/selection-sort.jpeg"/>
-
 - Look at the remaining the N-1 books and select the shortest.
-- Swap this book with the second book.
 
-<img src="./img/selection-sort-2.jpeg"/>
+- Swap this book with the second book.
 
 - And so on...
 
