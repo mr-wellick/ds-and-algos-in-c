@@ -187,6 +187,8 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 
 - Big O: N log(N)
 
+<img src="./img/merge-sort.jpeg"/>
+
 - Any cases where  mergesort is less efficient? No, mergesort works equally well regardless of the ordering of the data.
 
 - Note: because the merge function needs a secondary array, this can slow things down. In contrast, quicksort doesn't need to allocate any new arrays to work.
