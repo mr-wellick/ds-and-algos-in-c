@@ -107,6 +107,19 @@ void test_mergesort(void) {
   }
 }
 
+void test_merge(void) {
+  int data[] = {1, 13, 21, 30, 40, 69, 5, 13, 19, 20};
+  int n1 = 6;
+  int n2 = 2;
+
+  merge(data, n1, n2);
+
+  printf("sorted array with merge: \n");
+  for (int i = 0; i < n1 + n2; i++) {
+    printf("the value is %d\n", data[i]);
+  }
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_selection_sort);
@@ -114,6 +127,7 @@ int main(void) {
   RUN_TEST(test_bubble_sort);
   RUN_TEST(test_quicksort);
   RUN_TEST(test_mergesort);
+  RUN_TEST(test_merge);
   UNITY_END();
 
   return 0;

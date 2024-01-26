@@ -1,5 +1,6 @@
 #include "./sorting.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 void selectionSort(int items[], int n) {
   for (int i = 0; i < n; i++) {
@@ -99,6 +100,43 @@ void quickSort(int items[], int first, int last) {
     quickSort(items, first, pivotIndex - 1);
     quickSort(items, pivotIndex + 1, last);
   }
+}
+
+// pass an array with two sizes n1 and n2
+void merge(int data[], int n1, int n2) {
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  int temp[n1 + n2];
+  int *secHalf = data + n1;
+
+  while (i < n1 || j < n2) {
+    // k++ is post increment, meaning k=0, we assign to temp[0], then increment
+    // k by 1. At the next iteration k=1, we assign to temp[1], then increment k
+    // by 1, and so on.
+
+    // first two if statements handle following cases:
+    //  - All items in first half are smaller than second half.
+    //  - All items in second half are smaller than first half.
+    //  - We ran out of items for first half or second half. In this case,
+    //  append remaining items to end of temp.
+
+    //  last two if statements handle the following cases:
+    //  - Choosing the smaller item between first half and second half until we run out of items
+    //  for first half or second half.
+
+    if (i == n1)
+      temp[k++] = secHalf[j++];
+    else if (j == n2)
+      temp[k++] = data[i++];
+    else if (data[i] <= secHalf[j])
+      temp[k++] = data[i++];
+    else
+      temp[k++] = secHalf[j++];
+  }
+
+  for (int i = 0; i < n1 + n2; i++)
+    data[i] = temp[i];
 }
 
 void mergeSort() {}

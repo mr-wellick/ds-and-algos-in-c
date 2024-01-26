@@ -176,3 +176,4 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 - The basic merge algorithm takes two-presorted arrays as inputs and outputs a combined, third sorted array.
 
 <img src="./img/merge.jpeg"/>
+
