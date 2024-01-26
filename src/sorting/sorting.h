@@ -13,6 +13,6 @@ void quickSort(int items[], int first, int last);
 
 void merge(int data[], int n1, int n2);
 
-void mergeSort();
+void mergeSort(int data[], int size);
 
 #endif

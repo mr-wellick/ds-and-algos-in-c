@@ -87,26 +87,6 @@ void test_quicksort(void) {
   }
 }
 
-void test_mergesort(void) {
-  srand(time(NULL));
-
-  int size = 15;
-  int elements[size];
-
-  for (int i = 0; i < size; i++) {
-    int randomValue = rand() % 500;
-    elements[i] = randomValue;
-  }
-
-  mergeSort();
-
-  printf("\n");
-  printf("sorted array with quicksort: \n");
-  for (int i = 0; i < size; i++) {
-    printf("the value is %d\n", elements[i]);
-  }
-}
-
 void test_merge(void) {
   int data[] = {1, 13, 21, 30, 40, 69, 5, 13, 19, 20};
   int n1 = 6;
@@ -120,14 +100,34 @@ void test_merge(void) {
   }
 }
 
+void test_mergesort(void) {
+  srand(time(NULL));
+
+  int size = 5;
+  int elements[size];
+
+  for (int i = 0; i < size; i++) {
+    int randomValue = rand() % 500;
+    elements[i] = randomValue;
+  }
+
+  mergeSort(elements, size);
+
+  printf("\n");
+  printf("sorted array with mergesort: \n");
+  for (int i = 0; i < size; i++) {
+    printf("the value is %d\n", elements[i]);
+  }
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_selection_sort);
   RUN_TEST(test_insertion_sort);
   RUN_TEST(test_bubble_sort);
   RUN_TEST(test_quicksort);
-  RUN_TEST(test_mergesort);
   RUN_TEST(test_merge);
+  RUN_TEST(test_mergesort);
   UNITY_END();
 
   return 0;

@@ -1,6 +1,5 @@
 #include "./sorting.h"
 #include <stdbool.h>
-#include <stdio.h>
 
 void selectionSort(int items[], int n) {
   for (int i = 0; i < n; i++) {
@@ -139,10 +138,16 @@ void merge(int data[], int n1, int n2) {
     data[i] = temp[i];
 }
 
-void mergeSort() {
-  // if array n=1, return
+void mergeSort(int data[], int size) {
+  // array is sorted
+  if (size == 1)
+    return;
+
   // Split array into two equal sections
-  // Recursively call Mergesort function on the left half
-  // Recursively call Mergesort function on the right half
-  // Merge two halves using merge function
+  int mid = size / 2;
+
+  mergeSort(data, mid);
+  mergeSort(data + mid, size - mid);
+
+  merge(data, mid, size - mid);
 }

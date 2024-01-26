@@ -127,7 +127,7 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 
 - Each h-sort more correctly sorts the array, making the process simpler each iteration.
 
-- Big O: The worst case is n^2, but the average case has not been determined mathematically. Experimental measurements suggest that the average running time is O(n^1.25). 
+- Big O: The worst case is n^2, but the average case has not been determined mathematically. Experimental measurements suggest that the average running time is O(n^1.25).
 
 - Shell sort is not stable because items that are far apart (h items apart) can move far distances, jumping earlier in the array than items that have their same value.
 
@@ -177,3 +177,18 @@ In this case, it takes N steps to complete. Conversely, a perfectly mis-ordered 
 
 <img src="./img/merge.jpeg"/>
 
+- Idea for mergesort:
+
+    - if array n=1, return
+    - split array into two equal sections
+    - recursively call mergesort function on left half
+    - recursively call mergesort function on right half
+    - merge two halves using merge function
+
+- Big O: N log(N)
+
+- Any cases where  mergesort is less efficient? No, mergesort works equally well regardless of the ordering of the data.
+
+- Note: because the merge function needs a secondary array, this can slow things down. In contrast, quicksort doesn't need to allocate any new arrays to work.
+
+- Mergesort is stable!
