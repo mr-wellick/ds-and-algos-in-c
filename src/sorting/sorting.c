@@ -118,12 +118,12 @@ void merge(int data[], int n1, int n2) {
     // first two if statements handle following cases:
     //  - All items in first half are smaller than second half.
     //  - All items in second half are smaller than first half.
-    //  - We ran out of items for first half or second half. In this case,
+    //  - Or we run out of items for first half or second half. In this case,
     //  append remaining items to end of temp.
 
     //  last two if statements handle the following cases:
-    //  - Choosing the smaller item between first half and second half until we run out of items
-    //  for first half or second half.
+    //  - Choosing the smaller item between first half and second half until we
+    //  run out of items for first half or second half.
 
     if (i == n1)
       temp[k++] = secHalf[j++];
@@ -139,4 +139,10 @@ void merge(int data[], int n1, int n2) {
     data[i] = temp[i];
 }
 
-void mergeSort() {}
+void mergeSort() {
+  // if array n=1, return
+  // Split array into two equal sections
+  // Recursively call Mergesort function on the left half
+  // Recursively call Mergesort function on the right half
+  // Merge two halves using merge function
+}
